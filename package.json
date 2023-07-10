@@ -1,0 +1,15 @@
+{
+  "name": "ls",
+  "version": "1.0.0",
+  "description": "React Native Acid21 Template",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acid-21/react-native-template-acid21.git"
+  },
+  "author": "Tarik Huber",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/acid-21/react-native-template-acid21/issues"
+  },
+  "homepage": "https://github.com/acid-21/react-native-template-acid21#readme"
+}
