@@ -1,0 +1,10 @@
+{
+  "general": {
+    "welcome": "Willkommen",
+    "profile": "Profil",
+    "settings": "Einstellungen"
+  },
+  "settings":{
+    "change_language": "Sprache ändern"
+  }
+}

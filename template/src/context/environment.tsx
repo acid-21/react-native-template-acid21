@@ -22,14 +22,22 @@ const EnvironmentProvider: React.FC<IEnvironmentProvider> = ({
     React.useState<IEnvironment>(defaultEnvironment);
   const [initializing, setInitializing] = React.useState<boolean>(true);
 
+  console.log('environment', environment);
+
   React.useEffect(() => {
     (async () => {
       setInitializing(true);
       try {
-        const savedEnv = (await AsyncStorage.getItem('environment')) || '';
-        const s = JSON.parse(savedEnv);
-        if (s !== null) {
-          setEnvironment(s);
+        const savedEnv = await AsyncStorage.getItem('environment');
+
+        if (savedEnv !== null) {
+          // We don't use the saved env because the params could change over time
+          // and with this we make usre that the environment used alwasy has the latest data
+          const s = JSON.parse(savedEnv);
+          const tempEnv = environments.find((e: IEnvironment) => {
+            e.id === s.id;
+          });
+          setEnvironment(tempEnv || defaultEnvironment);
         } else {
           setEnvironment(defaultEnvironment);
         }
@@ -39,7 +47,7 @@ const EnvironmentProvider: React.FC<IEnvironmentProvider> = ({
         setInitializing(false);
       }
     })();
-  }, [defaultEnvironment]);
+  }, [defaultEnvironment, environments]);
 
   const changeEnvironment = (env: IEnvironment) => {
     console.log('setEnvironment', env);
