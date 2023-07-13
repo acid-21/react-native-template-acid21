@@ -1,13 +1,31 @@
 import * as React from 'react';
-import {
-  EnvironmentContextType,
-  IEnvironment,
-  IEnvironmentProvider,
-} from '../@types/environment';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const EnvironmentContext =
-  React.createContext<EnvironmentContextType | null>(null);
+export interface IEnvironment {
+  id: string;
+  label: string;
+  isDebug: boolean;
+  isProductionDefault: boolean;
+  isDebugDefault: boolean;
+  params: any;
+}
+export interface IEnvironmentProvider {
+  children: React.ReactNode;
+  environments: IEnvironment[];
+}
+export type EnvironmentContextType = {
+  environment?: IEnvironment;
+  initializing: boolean;
+  environments: IEnvironment[];
+  changeEnvironment: (environment: IEnvironment) => void;
+};
+
+export const EnvironmentContext = React.createContext<EnvironmentContextType>({
+  environment: undefined,
+  initializing: true,
+  environments: [],
+  changeEnvironment: () => {},
+});
 
 const EnvironmentProvider: React.FC<IEnvironmentProvider> = ({
   children,
@@ -22,8 +40,6 @@ const EnvironmentProvider: React.FC<IEnvironmentProvider> = ({
     React.useState<IEnvironment>(defaultEnvironment);
   const [initializing, setInitializing] = React.useState<boolean>(true);
 
-  console.log('environment', environment);
-
   React.useEffect(() => {
     (async () => {
       setInitializing(true);
@@ -33,9 +49,9 @@ const EnvironmentProvider: React.FC<IEnvironmentProvider> = ({
         if (savedEnv !== null) {
           // We don't use the saved env because the params could change over time
           // and with this we make usre that the environment used alwasy has the latest data
-          const s = JSON.parse(savedEnv);
+          const s = JSON.parse(savedEnv) as IEnvironment;
           const tempEnv = environments.find((e: IEnvironment) => {
-            e.id === s.id;
+            return e.id === s.id;
           });
           setEnvironment(tempEnv || defaultEnvironment);
         } else {
@@ -50,13 +66,13 @@ const EnvironmentProvider: React.FC<IEnvironmentProvider> = ({
   }, [defaultEnvironment, environments]);
 
   const changeEnvironment = (env: IEnvironment) => {
-    console.log('setEnvironment', env);
     setEnvironment(env);
+    AsyncStorage.setItem('environment', JSON.stringify(env));
   };
 
   return (
     <EnvironmentContext.Provider
-      value={{environment, changeEnvironment, initializing}}>
+      value={{environment, changeEnvironment, initializing, environments}}>
       {children}
     </EnvironmentContext.Provider>
   );

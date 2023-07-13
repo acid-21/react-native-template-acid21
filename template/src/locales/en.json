@@ -2,9 +2,14 @@
   "general": {
     "welcome": "Wlecome",
     "profile": "Profile",
-    "settings": "Settings"
+    "settings": "Settings",
+    "en_locale": "English",
+    "de_locale": "German"
   },  
   "settings":{
-    "change_language": "Change language"
+    "change_language": "Change language",
+    "current_language": "Current language",
+    "change_environment": "Change environment",
+    "current_environment": "Current environment"
   }
 }

@@ -1,14 +1,12 @@
-import React, {useCallback, useMemo, useRef} from 'react';
+import React from 'react';
 import {View, Text, Button, StyleSheet} from 'react-native';
-import {
-  BottomSheetModal,
-  BottomSheetModalProvider,
-  BottomSheetBackdrop,
-} from '@gorhom/bottom-sheet';
 import {useTranslation} from 'react-i18next';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {AppRoutes} from '../../constants/routes';
-import {BottomSheetDefaultBackdropProps} from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetBackdrop/types';
+import {ModalsContext} from '../../context/modals';
+import {LocaleContext} from '../../context/locales';
+import {AppModals} from '../../constants/modals';
+import {EnvironmentContext} from '../../context/environment';
 
 type Props = {
   navigation: StackNavigationProp<any, AppRoutes.Settings>;
@@ -16,55 +14,35 @@ type Props = {
 
 export const SettingsScreen: React.FC<Props> = ({}) => {
   const {t} = useTranslation();
-
-  // ref
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-
-  // variables
-  const snapPoints = useMemo(() => ['25%', '50%'], []);
-
-  // callbacks
-  const handlePresentModalPress = useCallback(() => {
-    bottomSheetModalRef.current?.present();
-  }, []);
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
-  }, []);
-
-  // renders
-  const renderBackdrop = useCallback(
-    (
-      props: React.JSX.IntrinsicAttributes & BottomSheetDefaultBackdropProps,
-    ) => (
-      <BottomSheetBackdrop
-        {...props}
-        disappearsOnIndex={-1}
-        appearsOnIndex={0}
-      />
-    ),
-    [],
-  );
+  const {locale} = React.useContext(LocaleContext);
+  const {setOpenModal} = React.useContext(ModalsContext);
+  const {environment} = React.useContext(EnvironmentContext);
 
   return (
-    <BottomSheetModalProvider>
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <View>
         <Button
-          onPress={handlePresentModalPress}
+          onPress={() => {
+            setOpenModal(AppModals.Locales, true);
+          }}
           title={t('settings.change_language')}
           color="black"
         />
-        <BottomSheetModal
-          ref={bottomSheetModalRef}
-          index={1}
-          snapPoints={snapPoints}
-          backdropComponent={renderBackdrop}
-          onChange={handleSheetChanges}>
-          <View style={styles.contentContainer}>
-            <Text>Awesome 🎉</Text>
-          </View>
-        </BottomSheetModal>
+        <Text>{`${t('settings.current_language')}: ${locale}`}</Text>
       </View>
-    </BottomSheetModalProvider>
+      <View>
+        <Button
+          onPress={() => {
+            setOpenModal(AppModals.Environments, true);
+          }}
+          title={t('settings.change_environment')}
+          color="black"
+        />
+        <Text>{`${t('settings.current_environment')}: ${
+          environment?.label
+        }`}</Text>
+      </View>
+    </View>
   );
 };
 
@@ -72,8 +50,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 24,
-    //justifyContent: 'center',
-    //backgroundColor: 'grey',
   },
   contentContainer: {
     flex: 1,
