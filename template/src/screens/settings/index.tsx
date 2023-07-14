@@ -33,7 +33,7 @@ export const SettingsScreen: React.FC<Props> = ({}) => {
       <View>
         <Button
           onPress={() => {
-            setOpenModal(AppModals.Environments, true);
+            setOpenModal(AppModals.EnvironmentPin, true);
           }}
           title={t('settings.change_environment')}
           color="black"

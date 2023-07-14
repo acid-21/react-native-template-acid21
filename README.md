@@ -23,6 +23,8 @@ bottom modals: https://gorhom.github.io/react-native-bottom-sheet/
 
 react native elements: https://reactnativeelements.com/docs
 
+App Icon Generator: https://www.appicon.co/
+
 Common commands:
 start project: npm run start
 start project with clearing cache: npm start -- --reset-cache
