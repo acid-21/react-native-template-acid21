@@ -9,11 +9,11 @@ type Props = {
   navigation: StackNavigationProp<any, AppRoutes.Home>;
 };
 
-export const HomeScreen: React.FC<Props> = () => {
+export const FavoritesScreen: React.FC<Props> = ({}) => {
   const {t} = useTranslation();
   return (
     <View>
-      <Title title={t('general.home_screen')} />
+      <Title title={t('general.favorites_screen')} />
     </View>
   );
 };

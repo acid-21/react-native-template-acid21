@@ -17,7 +17,7 @@ export const HomeNavigator = () => {
         }}
       />
       <Stack.Screen
-        name={AppRoutes.Profile}
+        name={AppRoutes.Favorites}
         options={{
           headerShown: false,
         }}

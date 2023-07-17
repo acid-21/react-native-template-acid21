@@ -4,12 +4,17 @@
     "profile": "Profile",
     "settings": "Settings",
     "en_locale": "English",
-    "de_locale": "German"
+    "de_locale": "German",
+    "home_screen": "Home",
+    "favorites_screen": "Favorites"
   },  
   "settings":{
     "change_language": "Change language",
     "current_language": "Current language",
     "change_environment": "Change environment",
-    "current_environment": "Current environment"
+    "current_environment": "Current environment",
+     "language": "Language",
+    "environment": "Environment",
+    "dark_mode": "Dark mode"
   }
 }

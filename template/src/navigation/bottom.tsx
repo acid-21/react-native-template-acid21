@@ -1,7 +1,8 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {HomeNavigator} from './home';
-import {SettingsScreen} from '../screens/settings';
+import {AppRoutes} from '../constants/routes';
+import {FavoritesScreen} from '../screens/favorites';
 
 const Tab = createBottomTabNavigator();
 
@@ -12,15 +13,16 @@ const BottomTabNavigator = () => {
         name="HomeNavigator"
         options={{
           headerShown: false,
+          title: 'Home',
         }}
         component={HomeNavigator}
       />
       <Tab.Screen
-        name="Settings"
+        name={AppRoutes.Favorites}
         options={{
           headerShown: false,
         }}
-        component={SettingsScreen}
+        component={FavoritesScreen}
       />
     </Tab.Navigator>
   );

@@ -4,12 +4,17 @@
     "profile": "Profil",
     "settings": "Einstellungen",
     "en_locale": "Englisch",
-    "de_locale": "Deutsch"
+    "de_locale": "Deutsch",
+    "home_screen": "Home",
+    "favorites_screen": "Favoriten"
   },
   "settings":{
     "change_language": "Sprache ändern",
     "current_language": "Aktuelle Sprache",
     "change_environment": "Umgebung ändern",
-    "current_environment": "Aktuelle Umgebung"
+    "current_environment": "Aktuelle Umgebung",
+    "language": "Sprache",
+    "environment": "Umgebung",
+    "dark_mode": "Dunkler Modus"
   }
 }

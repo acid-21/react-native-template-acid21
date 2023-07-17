@@ -22,8 +22,11 @@ i18n: https://levelup.gitconnected.com/complete-i18n-guide-to-support-multi-lang
 bottom modals: https://gorhom.github.io/react-native-bottom-sheet/
 
 react native elements: https://reactnativeelements.com/docs
+react native paper: https://reactnativepaper.com/
 
 App Icon Generator: https://www.appicon.co/
+
+App theming: https://reactnavigation.org/docs/themes/
 
 Common commands:
 start project: npm run start
