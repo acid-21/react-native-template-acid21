@@ -1,0 +1,49 @@
+# This is an example Starter pipeline configuration
+# Use a skeleton to build, test and deploy using manual and parallel steps
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+
+image: reactnativecommunity/react-native-android:5.4
+
+pipelines:
+  branches:
+    main:
+      - step:
+          size: 2x
+          name: Build Android Production Release APK
+          caches:
+            - node
+          script:
+            - npm i
+            - npm i -g firebase-tools@11.30.0
+            - VERSION=$(npm run version --silent)
+            - cd android && chmod +x gradlew && ./gradlew assembleRelease
+            - cp app/build/outputs/apk/release/app-release.apk "app/build/outputs/apk/release/APP-$VERSION.apk"
+            - firebase appdistribution:distribute "app/build/outputs/apk/release/app-release.apk" --app $FIREBASE_APP_ID --groups "$FIREBASE_GROUPS" --token $FIREBASE_TOKEN
+            - pipe: atlassian/bitbucket-upload-file:0.3.2
+              variables:
+                BITBUCKET_USERNAME: $BITBUCKET_USERNAME
+                BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
+                FIREBASE_APP_ID: $FIREBASE_APP_ID
+                FIREBASE_GROUPS: $FIREBASE_GROUPS
+                FILENAME: 'app/build/outputs/apk/release/APP-$VERSION.apk'
+          artifacts:
+            - app/build/outputs/apk/release/app-release.apk
+      - step:
+          size: 2x
+          name: Build Android Production Release AAB
+          caches:
+            - node
+          script:
+            - npm i
+            - VERSION=$(npm run version --silent)
+            - cd android && chmod +x gradlew && ./gradlew bundleRelease
+            - cp app/build/outputs/bundle/release/app-release.aab "app/build/outputs/bundle/release/$PROJECT_SHORT_NAME-$VERSION.aab"
+            - pipe: atlassian/bitbucket-upload-file:0.3.2
+              variables:
+                BITBUCKET_USERNAME: $BITBUCKET_USERNAME
+                BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
+                PROJECT_SHORT_NAME: $PROJECT_SHORT_NAME
+                FILENAME: 'app/build/outputs/bundle/release/$PROJECT_SHORT_NAME-$VERSION.aab'
+          artifacts:
+            - android/app/build/outputs/bundle/release/app-release.aab
