@@ -43,7 +43,7 @@ jobs:
       - name: Build application
         run: |
           cd ./template/android
-          ./gradlew assembleDebug
+          ./gradlew assembleRelease
       - name: Publish to Firebase
         run: |
           cd ./template/android
