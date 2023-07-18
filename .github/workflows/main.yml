@@ -47,6 +47,8 @@ jobs:
       - name: Publish to Firebase
         run: |
           cd ./template/android
-          firebase appdistribution:distribute "app/build/outputs/apk/debug/app-debug.apk" --app 1:133840043461:android:32ab6a4a6ac7540b299fac --groups "testers" --token $FIREBASE_TOKEN
+          firebase appdistribution:distribute "app/build/outputs/apk/debug/app-debug.apk" --app $APP_ID --groups "$GROUPS" --token $FIREBASE_TOKEN
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          APP_ID: ${{ secrets.APP_ID }}
+          GROUPS: ${{ secrets.GROUPS }}
