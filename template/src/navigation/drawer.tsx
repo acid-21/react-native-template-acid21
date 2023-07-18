@@ -1,22 +1,30 @@
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-
 import {SettingsScreen} from '../screens/settings';
 import BottomTabNavigator from './bottom';
+import {AppRoutes} from '../constants/routes';
+import {useTheme} from '@react-navigation/native';
 
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
   const {t} = useTranslation();
+  const {colors} = useTheme();
 
   return (
-    <Drawer.Navigator>
+    <Drawer.Navigator
+      screenOptions={{
+        headerTintColor: colors.primary,
+        headerTitleStyle: {
+          color: colors.text,
+        },
+      }}>
       <Drawer.Screen
-        name="BottomTabNavigator"
+        name={AppRoutes.BottomTabNavigator}
         component={BottomTabNavigator}
         options={{
-          title: 'Home Navigation',
+          title: t('general.home_navigation'),
         }}
       />
       <Drawer.Screen name={t('general.settings')} component={SettingsScreen} />

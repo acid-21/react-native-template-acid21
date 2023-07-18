@@ -28,6 +28,8 @@ App Icon Generator: https://www.appicon.co/
 
 App theming: https://reactnavigation.org/docs/themes/
 
+Vector Icons: https://github.com/oblador/react-native-vector-icons
+
 Common commands:
 start project: npm run start
 start project with clearing cache: npm start -- --reset-cache

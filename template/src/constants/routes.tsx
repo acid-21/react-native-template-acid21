@@ -3,4 +3,6 @@ export enum AppRoutes {
   Profile = 'Profile',
   Settings = 'Settings',
   Favorites = 'Favorites',
+  HomeNavigator = 'HomeNavigator',
+  BottomTabNavigator = 'BottomTabNavigator',
 }
