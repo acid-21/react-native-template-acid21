@@ -40,7 +40,14 @@ jobs:
         run: |
           cd ./template
           npm i
+          npm i -g firebase-tools
       - name: Build application
         run: |
           cd ./template/android
           ./gradlew assembleDebug
+      - name: Publish to Firebase
+        run: |
+          cd ./template/android
+          firebase appdistribution:distribute "app/build/outputs/apk/debug/app-debug.apk" --app 1:133840043461:android:32ab6a4a6ac7540b299fac --groups "testers" --token $FIREBASE_TOKEN
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
