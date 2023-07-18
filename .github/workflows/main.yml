@@ -8,7 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      # Setup .npmrc file to publish to npm
       - uses: actions/setup-node@v3
         with:
           node-version: "16.x"
@@ -18,11 +17,30 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
   publish_android_app:
     runs-on: ubuntu-latest
-    container: reactnativecommunity/react-native-android:latest
     steps:
-      - name: Install dependencies
-        run: npm i
-        working-directory: template
-      - name: Generate apl
-        run: ./gradlew assembleDebug
-        working-directory: template/android
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: "11"
+          distribution: "adopt"
+          cache: "gradle"
+
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+
+      - name: Run npm Install
+        run: |
+          cd ./template
+          npm i
+      - name: Build application
+        run: |
+          cd ./template/android
+          ./gradlew assembleDebug
