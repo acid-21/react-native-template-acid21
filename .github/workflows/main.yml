@@ -20,10 +20,6 @@ jobs:
     runs-on: ubuntu-latest
     container: reactnativecommunity/react-native-android:latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "16.x"
       - run: cd template
       - run: npm i
       - run: cd android
