@@ -19,7 +19,7 @@ const DrawerNavigator = () => {
           title: 'Home Navigation',
         }}
       />
-      <Drawer.Screen name={t('settings.settings')} component={SettingsScreen} />
+      <Drawer.Screen name={t('general.settings')} component={SettingsScreen} />
     </Drawer.Navigator>
   );
 };
