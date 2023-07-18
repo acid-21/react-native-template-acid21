@@ -9,6 +9,7 @@ import {useTheme} from '@react-navigation/native';
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
+  //Using navigation here will reset to initial route after locale change
   const {t} = useTranslation();
   const {colors} = useTheme();
 

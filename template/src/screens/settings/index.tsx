@@ -24,7 +24,7 @@ export const SettingsScreen: React.FC<Props> = ({}) => {
   const {setOpenModal} = React.useContext(ModalsContext);
   const {environment} = React.useContext(EnvironmentContext);
   const {colors} = useTheme();
-  const {isDarkMode, setIsDarkMode} = useContext(ThemeContext);
+  const {isDarkMode, setDarkMode} = useContext(ThemeContext);
 
   return (
     <View style={styles.container}>
@@ -65,7 +65,7 @@ export const SettingsScreen: React.FC<Props> = ({}) => {
             <Switch
               value={isDarkMode}
               onChange={() => {
-                setIsDarkMode(!isDarkMode);
+                setDarkMode(!isDarkMode);
               }}
             />
           )}

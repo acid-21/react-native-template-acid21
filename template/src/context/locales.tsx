@@ -65,7 +65,7 @@ const LocaleProvider: React.FC<ILocalesProvider> = ({children, locales}) => {
         const savedLocale = await AsyncStorage.getItem('locale');
 
         if (savedLocale !== null) {
-          changeLocale(savedLocale);
+          setLocale(savedLocale);
         }
       } catch (error) {
         console.error(error);
