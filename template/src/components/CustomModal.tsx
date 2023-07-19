@@ -1,8 +1,9 @@
 import React, {useCallback, useEffect, useMemo, useRef} from 'react';
 import {BottomSheetModal, BottomSheetBackdrop} from '@gorhom/bottom-sheet';
-
+import {Keyboard} from 'react-native';
 import {BottomSheetDefaultBackdropProps} from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetBackdrop/types';
 import {ModalsContext} from '../context/modals';
+import {useTheme} from '@react-navigation/native';
 
 type Props = {
   children: React.ReactNode;
@@ -17,7 +18,20 @@ export const CustomModal: React.FC<Props> = ({
   height,
   modalProps,
 }) => {
+  const {colors} = useTheme();
   const {isOpenModal, setOpenModal} = React.useContext(ModalsContext);
+
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+
+  useEffect(() => {
+    const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+      bottomSheetModalRef.current?.snapToIndex(0);
+    });
+
+    return () => {
+      hideSubscription.remove();
+    };
+  }, []);
 
   const open = useMemo(() => isOpenModal(name), [isOpenModal, name]);
 
@@ -29,9 +43,7 @@ export const CustomModal: React.FC<Props> = ({
     }
   }, [open]);
 
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-
-  const snapPoints = useMemo(() => [height], [height]);
+  const snapPoints = useMemo(() => [height, '100%'], [height]);
 
   const renderBackdrop = useCallback(
     (
@@ -57,6 +69,8 @@ export const CustomModal: React.FC<Props> = ({
         }
       }}
       backdropComponent={renderBackdrop}
+      backgroundStyle={{backgroundColor: colors.background}}
+      handleIndicatorStyle={{backgroundColor: colors.border}}
       {...modalProps}>
       {children}
     </BottomSheetModal>

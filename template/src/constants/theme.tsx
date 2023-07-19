@@ -1,4 +1,5 @@
-const primaryColor = 'rgb(65, 100, 74)';
+const cardColor = 'rgb(28, 103, 88)';
+const primaryColor = 'rgb(255, 96, 0)';
 
 const getTheme = (theme: any, isDarkMode: boolean, type: string) => {
   if (type === 'elements') {
@@ -7,10 +8,12 @@ const getTheme = (theme: any, isDarkMode: boolean, type: string) => {
       lightColors: {
         ...theme.lightColors,
         primary: primaryColor,
+        card: cardColor,
       },
       darkColors: {
         ...theme.darkColors,
         primary: primaryColor,
+        card: cardColor,
       },
     };
   }
@@ -19,6 +22,8 @@ const getTheme = (theme: any, isDarkMode: boolean, type: string) => {
     colors: {
       ...theme.colors,
       primary: primaryColor,
+      card: cardColor,
+      altText: 'white',
     },
   };
 };

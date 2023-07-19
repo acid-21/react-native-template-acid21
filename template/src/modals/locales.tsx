@@ -5,9 +5,10 @@ import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import {useTranslation} from 'react-i18next';
 import {CustomModal} from '../components/CustomModal';
 import {ILocale, LocaleContext} from '../context/locales';
-import {ListItem} from '@rneui/themed';
+import {List, Text} from 'react-native-paper';
 import {ModalsContext} from '../context/modals';
 import {AppModals} from '../constants/modals';
+import {useTheme} from '@react-navigation/native';
 
 type Props = {};
 
@@ -15,23 +16,26 @@ export const LocalesModal: React.FC<Props> = ({}) => {
   const {setOpenModal} = useContext(ModalsContext);
   const {locales, changeLocale} = useContext(LocaleContext);
   const {t} = useTranslation();
+  const {colors} = useTheme();
 
   // render
   const renderItem = useCallback(
     ({item}: {item: ILocale}): React.JSX.Element => (
       <View style={{width: '100%'}}>
-        <ListItem
+        <List.Item
           onPress={() => {
             changeLocale(item.id);
             setOpenModal(AppModals.Locales, false);
-          }}>
-          <ListItem.Content>
-            <ListItem.Title>{t(`general.${item.label_id}`)}</ListItem.Title>
-          </ListItem.Content>
-        </ListItem>
+          }}
+          title={
+            <Text variant="titleLarge" style={{color: colors.text}}>
+              {t(`general.${item.label_id}`)}
+            </Text>
+          }
+        />
       </View>
     ),
-    [t, changeLocale, setOpenModal],
+    [colors.text, t, changeLocale, setOpenModal],
   );
 
   return (
@@ -41,7 +45,9 @@ export const LocalesModal: React.FC<Props> = ({}) => {
         data={locales}
         keyExtractor={i => i.id}
         renderItem={renderItem}
-        contentContainerStyle={styles.contentContainer}
+        contentContainerStyle={{
+          ...styles.contentContainer,
+        }}
       />
       <View style={{height: 35}} />
     </CustomModal>

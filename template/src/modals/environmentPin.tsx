@@ -5,21 +5,30 @@ import {BottomSheetTextInput} from '@gorhom/bottom-sheet';
 import {CustomModal} from '../components/CustomModal';
 import {ModalsContext} from '../context/modals';
 import {AppModals} from '../constants/modals';
-import {Text} from '@rneui/base';
+import {Text, useTheme} from 'react-native-paper';
 import moment from 'moment';
 
 type Props = {};
 
 export const EnvironmentPinModal: React.FC<Props> = ({}) => {
+  const theme = useTheme();
   const {setOpenModal} = useContext(ModalsContext);
 
   return (
     <CustomModal name={AppModals.EnvironmentPin} height="25%">
       <View style={{height: 20}} />
       <View style={{alignItems: 'center'}}>
-        <Text>Enter PIN</Text>
+        <Text variant="headlineMedium" style={{color: theme.colors.onSurface}}>
+          Enter PIN
+        </Text>
         <BottomSheetTextInput
-          style={styles.input}
+          style={{
+            ...styles.input,
+            backgroundColor: theme.colors.surfaceVariant,
+            color: theme.colors.onSurface,
+          }}
+          inputMode="numeric"
+          //autoFocus
           onChange={c => {
             const text = c.nativeEvent.text;
             if (text === moment().format('mmHH')) {

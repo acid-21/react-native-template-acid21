@@ -4,22 +4,21 @@ import {useTranslation} from 'react-i18next';
 import {SettingsScreen} from '../screens/settings';
 import BottomTabNavigator from './bottom';
 import {AppRoutes} from '../constants/routes';
-import {useTheme} from '@react-navigation/native';
 
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
   //Using navigation here will reset to initial route after locale change
   const {t} = useTranslation();
-  const {colors} = useTheme();
 
   return (
     <Drawer.Navigator
       screenOptions={{
-        headerTintColor: colors.primary,
+        headerTintColor: 'white',
         headerTitleStyle: {
-          color: colors.text,
+          color: 'white',
         },
+        drawerInactiveTintColor: 'white',
       }}>
       <Drawer.Screen
         name={AppRoutes.BottomTabNavigator}

@@ -17,5 +17,9 @@
      "language": "Language",
     "environment": "Environment",
     "dark_mode": "Dark mode"
+  },
+  "home":{
+    "toast_title": "Toast",
+    "toast_message": "This is a Toast"
   }
 }

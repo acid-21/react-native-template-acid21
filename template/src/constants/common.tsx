@@ -40,3 +40,5 @@ export const locales: ILocale[] = [
     translations: de,
   },
 ];
+
+export const toastConfig = {};

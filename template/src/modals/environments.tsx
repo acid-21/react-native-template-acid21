@@ -3,33 +3,37 @@ import React, {useCallback, useContext} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import {CustomModal} from '../components/CustomModal';
-import {ListItem} from '@rneui/themed';
 import {ModalsContext} from '../context/modals';
 import {AppModals} from '../constants/modals';
 import {EnvironmentContext, IEnvironment} from '../context/environment';
+import {List, Text} from 'react-native-paper';
+import {useTheme} from '@react-navigation/native';
 
 type Props = {};
 
 export const EnvironmentsModal: React.FC<Props> = ({}) => {
   const {setOpenModal} = useContext(ModalsContext);
   const {environments, changeEnvironment} = useContext(EnvironmentContext);
+  const {colors} = useTheme();
 
   // render
   const renderItem = useCallback(
     ({item}: {item: IEnvironment}): React.JSX.Element => (
       <View style={{width: '100%'}}>
-        <ListItem
+        <List.Item
           onPress={() => {
             changeEnvironment(item);
             setOpenModal(AppModals.Environments, false);
-          }}>
-          <ListItem.Content>
-            <ListItem.Title>{item.label}</ListItem.Title>
-          </ListItem.Content>
-        </ListItem>
+          }}
+          title={
+            <Text variant="titleLarge" style={{color: colors.text}}>
+              {item.label}
+            </Text>
+          }
+        />
       </View>
     ),
-    [setOpenModal, changeEnvironment],
+    [colors.text, changeEnvironment, setOpenModal],
   );
 
   return (

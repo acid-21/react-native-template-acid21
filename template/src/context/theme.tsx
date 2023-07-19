@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useColorScheme} from 'react-native';
+import {StatusBar, useColorScheme} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {ThemeProvider as ElementsProvider, createTheme} from '@rneui/themed';
 
@@ -92,21 +92,29 @@ const ThemeProvider: React.FC<IThemeProvider> = ({
     await AsyncStorage.setItem('theme', value ? 'dark' : 'light');
   };
 
+  const {colors} = AppTheme;
+
   return (
-    <PaperProvider theme={PaperTheme}>
-      <ElementsProvider theme={ElementsTheme}>
-        <ThemeContext.Provider
-          value={{
-            isDarkMode,
-            initializing,
-            AppTheme,
-            PaperTheme,
-            setDarkMode,
-          }}>
-          {children}
-        </ThemeContext.Provider>
-      </ElementsProvider>
-    </PaperProvider>
+    <>
+      <StatusBar
+        backgroundColor={colors.card}
+        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+      />
+      <PaperProvider theme={PaperTheme}>
+        <ElementsProvider theme={ElementsTheme}>
+          <ThemeContext.Provider
+            value={{
+              isDarkMode,
+              initializing,
+              AppTheme,
+              PaperTheme,
+              setDarkMode,
+            }}>
+            {children}
+          </ThemeContext.Provider>
+        </ElementsProvider>
+      </PaperProvider>
+    </>
   );
 };
 
