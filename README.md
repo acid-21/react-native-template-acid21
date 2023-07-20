@@ -26,9 +26,14 @@ react native paper: https://reactnativepaper.com/
 
 App Icon Generator: https://www.appicon.co/
 
-App theming: https://reactnavigation.org/docs/themes/
+App theming:
+https://reactnavigation.org/docs/themes/
+https://callstack.github.io/react-native-paper/docs/guides/theming
 
-Vector Icons: https://github.com/oblador/react-native-vector-icons
+Vector Icons:
+https://github.com/oblador/react-native-vector-icons
+
+App Icon change: https://www.npmjs.com/package/app-icon
 
 Common commands:
 start project: npm run start
