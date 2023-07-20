@@ -12,6 +12,7 @@ import AuthProvider from '../context/auth';
 import ThemeProvider, {ThemeContext} from '../context/theme';
 import getTheme from '../constants/theme';
 import Toast from 'react-native-toast-message';
+import APIProvider from '../context/api';
 
 const Navigation = ({children}: {children: any}) => {
   const {AppTheme} = React.useContext(ThemeContext);
@@ -33,7 +34,9 @@ const Providers = ({children}: {children: any}) => {
               <BottomSheetModalProvider>
                 <LocaleProvider locales={locales}>
                   <ThemeProvider getTheme={getTheme}>
-                    <Navigation>{children}</Navigation>
+                    <APIProvider>
+                      <Navigation>{children}</Navigation>
+                    </APIProvider>
                   </ThemeProvider>
                 </LocaleProvider>
               </BottomSheetModalProvider>

@@ -3,6 +3,11 @@ import {ILocale} from '../context/locales';
 import en from '../locales/en.json';
 import de from '../locales/de.json';
 
+const getCustomHeaders = (auth: any, locale: string) => {
+  const {isLoggedIn = false} = auth || {};
+  return {token: '123', locale, isLoggedIn};
+};
+
 export const environments: IEnvironment[] = [
   {
     id: 'dev',
@@ -11,7 +16,10 @@ export const environments: IEnvironment[] = [
     isProductionDefault: false,
     isDebugDefault: true,
     params: {
-      apiUrl: 'https://dev.example.com/api',
+      axios: {
+        baseURL: 'https://dev.example.com/api',
+        getCustomHeaders,
+      },
     },
   },
   {
@@ -21,7 +29,23 @@ export const environments: IEnvironment[] = [
     isProductionDefault: true,
     isDebugDefault: false,
     params: {
-      apiUrl: 'https://prod.example.com/api',
+      axios: {
+        baseURL: 'https://dev.example.com/api',
+        getCustomHeaders,
+      },
+    },
+  },
+  {
+    id: 'int',
+    label: 'Integration',
+    isDebug: false,
+    isProductionDefault: false,
+    isDebugDefault: false,
+    params: {
+      axios: {
+        baseURL: 'https://int.example.com/api',
+        getCustomHeaders,
+      },
     },
   },
 ];

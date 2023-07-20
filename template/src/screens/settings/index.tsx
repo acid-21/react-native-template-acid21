@@ -13,6 +13,7 @@ import {Icon} from '@rneui/themed';
 import {Switch} from 'react-native-paper';
 import {useTheme} from '@react-navigation/native';
 import {ThemeContext} from '../../context/theme';
+import {APIContext} from '../../context/api';
 
 type Props = {
   navigation: StackNavigationProp<any, AppRoutes.Settings>;
@@ -25,6 +26,13 @@ export const SettingsScreen: React.FC<Props> = ({}) => {
   const {environment} = React.useContext(EnvironmentContext);
   const {colors} = useTheme();
   const {isDarkMode, setDarkMode} = useContext(ThemeContext);
+  const {client} = useContext(APIContext);
+
+  console.log('client settings screen', client?.defaults.baseURL);
+  console.log(
+    'client headers settings screen',
+    client?.defaults.headers.common,
+  );
 
   return (
     <View style={styles.container}>
