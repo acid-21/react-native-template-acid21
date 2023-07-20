@@ -14,6 +14,7 @@ import {Switch} from 'react-native-paper';
 import {useTheme} from '@react-navigation/native';
 import {ThemeContext} from '../../context/theme';
 import {APIContext} from '../../context/api';
+import {UpdateContext} from '../../context/update';
 
 type Props = {
   navigation: StackNavigationProp<any, AppRoutes.Settings>;
@@ -27,6 +28,7 @@ export const SettingsScreen: React.FC<Props> = ({}) => {
   const {colors} = useTheme();
   const {isDarkMode, setDarkMode} = useContext(ThemeContext);
   const {client} = useContext(APIContext);
+  const {checkForUpdate, changeCheckForUpdate} = useContext(UpdateContext);
 
   console.log('client settings screen', client?.defaults.baseURL);
   console.log(
@@ -81,6 +83,25 @@ export const SettingsScreen: React.FC<Props> = ({}) => {
             <Icon
               type="material-icons"
               name="nightlight-round"
+              size={30}
+              color={colors.primary}
+            />
+          )}
+        />
+        <List.Item
+          title={t('settings.check_update')}
+          right={() => (
+            <Switch
+              value={checkForUpdate}
+              onChange={() => {
+                changeCheckForUpdate(!checkForUpdate);
+              }}
+            />
+          )}
+          left={() => (
+            <Icon
+              type="material-icons"
+              name="security-update"
               size={30}
               color={colors.primary}
             />

@@ -16,10 +16,21 @@
     "current_environment": "Aktuelle Umgebung",
     "language": "Sprache",
     "environment": "Umgebung",
-    "dark_mode": "Dunkler Modus"
+    "dark_mode": "Dunkler Modus",
+    "check_update": "Auf Updates prüfen"
   },
   "home":{
     "toast_title": "Toast",
     "toast_message": "Dies ist ein Toast"
+  },
+  "modals":{
+    "environmentPin":{
+      "title": "PIN eingeben"
+    },
+    "update":{
+      "title": "Update verfügbar",
+      "update": "Update ausführen",
+      "update_later": "Update verschieben"
+    }
   }
 }

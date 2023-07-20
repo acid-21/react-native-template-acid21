@@ -16,10 +16,22 @@
     "current_environment": "Current environment",
      "language": "Language",
     "environment": "Environment",
-    "dark_mode": "Dark mode"
+    "dark_mode": "Dark mode",
+    "check_update": "Check for updates"
+
   },
   "home":{
     "toast_title": "Toast",
     "toast_message": "This is a Toast"
+  },
+  "modals":{
+    "environmentPin":{
+      "title": "Enter PIN"
+    },
+    "update":{
+      "title": "Update available",
+      "update": "Update now",
+      "update_later": "Update later"
+    }
   }
 }

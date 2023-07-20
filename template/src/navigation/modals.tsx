@@ -3,6 +3,7 @@ import * as React from 'react';
 import {LocalesModal} from '../modals/locales';
 import {EnvironmentsModal} from '../modals/environments';
 import {EnvironmentPinModal} from '../modals/environmentPin';
+import {UpdateModal} from '../modals/update';
 
 export const Modals = () => {
   return (
@@ -10,6 +11,7 @@ export const Modals = () => {
       <LocalesModal />
       <EnvironmentsModal />
       <EnvironmentPinModal />
+      <UpdateModal />
     </>
   );
 };

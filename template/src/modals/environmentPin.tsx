@@ -7,19 +7,21 @@ import {ModalsContext} from '../context/modals';
 import {AppModals} from '../constants/modals';
 import {Text, useTheme} from 'react-native-paper';
 import moment from 'moment';
+import {useTranslation} from 'react-i18next';
 
 type Props = {};
 
 export const EnvironmentPinModal: React.FC<Props> = ({}) => {
   const theme = useTheme();
   const {setOpenModal} = useContext(ModalsContext);
+  const {t} = useTranslation();
 
   return (
     <CustomModal name={AppModals.EnvironmentPin} height="25%">
       <View style={{height: 20}} />
       <View style={{alignItems: 'center'}}>
         <Text variant="headlineMedium" style={{color: theme.colors.onSurface}}>
-          Enter PIN
+          {t('modals.environmentPin.title')}
         </Text>
         <BottomSheetTextInput
           style={{

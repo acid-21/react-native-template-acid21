@@ -2,7 +2,12 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import EnvironmentProvider from '../context/environment';
-import {environments, locales, toastConfig} from '../constants/common';
+import {
+  environments,
+  locales,
+  toastConfig,
+  updateData,
+} from '../constants/common';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import ModalsProvider from '../context/modals';
@@ -13,6 +18,7 @@ import ThemeProvider, {ThemeContext} from '../context/theme';
 import getTheme from '../constants/theme';
 import Toast from 'react-native-toast-message';
 import APIProvider from '../context/api';
+import UpdateProvider from '../context/update';
 
 const Navigation = ({children}: {children: any}) => {
   const {AppTheme} = React.useContext(ThemeContext);
@@ -35,7 +41,9 @@ const Providers = ({children}: {children: any}) => {
                 <LocaleProvider locales={locales}>
                   <ThemeProvider getTheme={getTheme}>
                     <APIProvider>
-                      <Navigation>{children}</Navigation>
+                      <UpdateProvider {...updateData}>
+                        <Navigation>{children}</Navigation>
+                      </UpdateProvider>
                     </APIProvider>
                   </ThemeProvider>
                 </LocaleProvider>

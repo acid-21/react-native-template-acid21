@@ -1,22 +1,16 @@
 import * as React from 'react';
-import axios from 'axios';
+import axios, {AxiosInstance} from 'axios';
 import {EnvironmentContext} from './environment';
 import {AuthContext} from './auth';
 import {LocaleContext} from './locales';
 
 const client = axios.create({});
 
-export interface IAuth {
-  user: any;
-  isLoggedIn: boolean;
-  params: any;
-}
-
 export type APIContextType = {
-  client: any;
+  client: AxiosInstance;
   initialized: boolean;
 };
-export interface IAuthProvider {
+export interface IAPIProvider {
   children: React.ReactNode;
 }
 
@@ -25,16 +19,13 @@ export const APIContext = React.createContext<APIContextType>({
   initialized: false,
 });
 
-const APIProvider: React.FC<IAuthProvider> = ({children}) => {
+const APIProvider: React.FC<IAPIProvider> = ({children}) => {
   const [initialized, setInitialized] = React.useState<boolean>(false);
   const {environment} = React.useContext(EnvironmentContext);
   const {auth} = React.useContext(AuthContext);
   const {locale} = React.useContext(LocaleContext);
   const {params} = environment || ({params: {}} as any);
   const {axios: axiosConfig} = params || ({baseURL: ''} as any);
-
-  console.log('environment', environment);
-  console.log('client', client.defaults.baseURL);
 
   React.useEffect(() => {
     const {
