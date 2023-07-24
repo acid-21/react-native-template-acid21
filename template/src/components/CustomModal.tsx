@@ -4,12 +4,16 @@ import {Keyboard} from 'react-native';
 import {BottomSheetDefaultBackdropProps} from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetBackdrop/types';
 import {ModalsContext} from '../context/modals';
 import {useTheme} from '@react-navigation/native';
+import {PaperProvider} from 'react-native-paper';
+import {ThemeContext} from '../context/theme';
+import {ThemeProvider as ElementsProvider} from '@rneui/themed';
 
 type Props = {
   children: React.ReactNode;
   name: string;
   height: string;
   modalProps?: any;
+  snapOnKeybaoard?: boolean;
 };
 
 export const CustomModal: React.FC<Props> = ({
@@ -17,21 +21,29 @@ export const CustomModal: React.FC<Props> = ({
   name,
   height,
   modalProps,
+  snapOnKeybaoard = false,
 }) => {
+  const {PaperTheme, ElementsTheme} = React.useContext(ThemeContext);
   const {colors} = useTheme();
   const {isOpenModal, setOpenModal} = React.useContext(ModalsContext);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   useEffect(() => {
+    const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+      if (snapOnKeybaoard) {
+        bottomSheetModalRef.current?.snapToIndex(1);
+      }
+    });
     const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
       bottomSheetModalRef.current?.snapToIndex(0);
     });
 
     return () => {
+      showSubscription.remove();
       hideSubscription.remove();
     };
-  }, []);
+  }, [snapOnKeybaoard]);
 
   const open = useMemo(() => isOpenModal(name), [isOpenModal, name]);
 
@@ -72,7 +84,9 @@ export const CustomModal: React.FC<Props> = ({
       backgroundStyle={{backgroundColor: colors.background}}
       handleIndicatorStyle={{backgroundColor: colors.border}}
       {...modalProps}>
-      {children}
+      <ElementsProvider theme={ElementsTheme}>
+        <PaperProvider theme={PaperTheme}>{children}</PaperProvider>
+      </ElementsProvider>
     </BottomSheetModal>
   );
 };

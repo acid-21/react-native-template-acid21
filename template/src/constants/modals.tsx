@@ -3,4 +3,6 @@ export enum AppModals {
   Environments = 'ENVIRONMENTS_MODAL',
   EnvironmentPin = 'ENVIRONMENT_PIN_MODAL',
   UpdateModal = 'UPDATE_MODAL',
+  SignIn = 'SIGN_IN_MODAL',
+  SignUp = 'SIGN_UP_MODAL',
 }

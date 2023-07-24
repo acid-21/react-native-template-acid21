@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useCallback, useContext} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View} from 'react-native';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import {CustomModal} from '../components/CustomModal';
 import {ModalsContext} from '../context/modals';
@@ -43,19 +43,11 @@ export const EnvironmentsModal: React.FC<Props> = ({}) => {
         data={environments}
         keyExtractor={i => i.id}
         renderItem={renderItem}
-        contentContainerStyle={styles.contentContainer}
+        contentContainerStyle={{
+          flex: 1,
+        }}
       />
       <View style={{height: 35}} />
     </CustomModal>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-  },
-  contentContainer: {
-    flex: 1,
-  },
-});

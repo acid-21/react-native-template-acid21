@@ -7,7 +7,12 @@
     "de_locale": "German",
     "home_screen": "Home",
     "home_navigation": "Home Navigation",
-    "favorites_screen": "Favorites"
+    "favorites_screen": "Favorites",
+    "sign_in": "Sign In",
+    "sign_up": "Sign Up",
+    "email": "E-Mail",
+    "password": "Password",
+    "confirm_password": "Confirm password"
   },  
   "settings":{
     "change_language": "Change language",

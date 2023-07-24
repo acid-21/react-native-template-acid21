@@ -16,10 +16,18 @@ export const ModalsContext = React.createContext<ModalContextType>({
 const ModalsProvider: React.FC<IModalsProvider> = ({children}) => {
   const [modals, setModals] = React.useState<any>({});
 
-  const setOpenModal = (name: string, open: boolean) => {
-    setModals((pr: any) => {
-      return {...pr, [name]: open};
-    });
+  const setOpenModal = (
+    name: string,
+    open: boolean,
+    closeOthers: boolean = true,
+  ) => {
+    if (closeOthers) {
+      setModals({[name]: open});
+    } else {
+      setModals((pr: any) => {
+        return {...pr, [name]: open};
+      });
+    }
   };
 
   const isOpenModal = React.useCallback(

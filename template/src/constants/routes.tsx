@@ -4,5 +4,6 @@ export enum AppRoutes {
   Settings = 'Settings',
   Favorites = 'Favorites',
   HomeNavigator = 'HomeNavigator',
+  SignIn = 'SignIn',
   BottomTabNavigator = 'BottomTabNavigator',
 }

@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export interface IAuth {
   user: any;
-  isLoggedIn: boolean;
+  isSignedIn: boolean;
   params: any;
 }
 
@@ -19,7 +19,7 @@ export interface IAuthProvider {
 export const AuthContext = React.createContext<AuthContextType>({
   auth: {
     user: null,
-    isLoggedIn: false,
+    isSignedIn: false,
     params: {},
   },
   initializing: true,
@@ -30,7 +30,7 @@ const AuthProvider: React.FC<IAuthProvider> = ({children}) => {
   const [initializing, setInitializing] = React.useState<boolean>(true);
   const [auth, setAuth] = React.useState<IAuth>({
     user: null,
-    isLoggedIn: false,
+    isSignedIn: false,
     params: {},
   });
 

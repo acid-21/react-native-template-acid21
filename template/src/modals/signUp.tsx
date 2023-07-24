@@ -1,40 +1,29 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useContext} from 'react';
+import React from 'react';
 import {View} from 'react-native';
 import {CustomModal} from '../components/CustomModal';
-import {ModalsContext} from '../context/modals';
 import {AppModals} from '../constants/modals';
-import {TextInput} from 'react-native-paper';
-import moment from 'moment';
+import {Button, TextInput} from 'react-native-paper';
 import {useTranslation} from 'react-i18next';
 import {Title} from '../components/Title';
 
 type Props = {};
 
-export const EnvironmentPinModal: React.FC<Props> = ({}) => {
+export const SignUpModal: React.FC<Props> = ({}) => {
   const [showPassword, setShowPassword] = React.useState(false);
-
-  const {setOpenModal} = useContext(ModalsContext);
   const {t} = useTranslation();
 
   return (
-    <CustomModal name={AppModals.EnvironmentPin} height="50%">
-      <View style={{paddingHorizontal: 16, alignItems: 'center'}}>
-        <Title title={t('modals.environmentPin.title')} />
+    <CustomModal name={AppModals.SignUp} height="80%">
+      <Title title={t('general.sign_up')} />
 
+      <View style={{paddingHorizontal: 16}}>
+        <TextInput mode="outlined" autoFocus label={t('general.email')} />
+        <View style={{height: 4}} />
         <TextInput
-          style={{width: '50%'}}
-          maxLength={4}
-          inputMode="numeric"
           mode="outlined"
-          autoFocus
+          label={t('general.password')}
           secureTextEntry={!showPassword}
-          onChange={c => {
-            const text = c.nativeEvent.text;
-            if (text === moment().format('mmHH')) {
-              setOpenModal(AppModals.Environments, true);
-            }
-          }}
           right={
             <TextInput.Icon
               icon={showPassword ? 'eye-off' : 'eye'}
@@ -44,6 +33,13 @@ export const EnvironmentPinModal: React.FC<Props> = ({}) => {
             />
           }
         />
+        <TextInput
+          mode="outlined"
+          label={t('general.confirm_password')}
+          secureTextEntry={!showPassword}
+        />
+        <View style={{height: 32}} />
+        <Button mode="contained">{t('general.sign_up')}</Button>
       </View>
 
       <View style={{height: 35}} />

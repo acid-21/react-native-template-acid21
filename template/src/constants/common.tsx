@@ -27,7 +27,8 @@ export const environments: IEnvironment[] = [
     isDebugDefault: true,
     params: {
       axios: {
-        baseURL: 'https://dev.example.com/api',
+        baseURL:
+          'https://us-central1-acid21-app-default.cloudfunctions.net/dev-',
         getCustomHeaders,
       },
     },
@@ -40,7 +41,8 @@ export const environments: IEnvironment[] = [
     isDebugDefault: false,
     params: {
       axios: {
-        baseURL: 'https://dev.example.com/api',
+        baseURL:
+          'https://us-central1-acid21-app-default.cloudfunctions.net/prod-',
         getCustomHeaders,
       },
     },
@@ -53,7 +55,8 @@ export const environments: IEnvironment[] = [
     isDebugDefault: false,
     params: {
       axios: {
-        baseURL: 'https://int.example.com/api',
+        baseURL:
+          'https://us-central1-acid21-app-default.cloudfunctions.net/dev-',
         getCustomHeaders,
       },
     },

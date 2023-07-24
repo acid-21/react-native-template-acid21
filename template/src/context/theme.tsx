@@ -29,6 +29,7 @@ export type ThemeContextType = {
   initializing: boolean;
   AppTheme: any;
   PaperTheme: any;
+  ElementsTheme: any;
   setDarkMode: (value: boolean) => void;
 };
 export interface IThemeProvider {
@@ -41,6 +42,7 @@ export const ThemeContext = React.createContext<ThemeContextType>({
   initializing: true,
   AppTheme: LightTheme,
   PaperTheme: MD3LightTheme,
+  ElementsTheme: MD3LightTheme,
   setDarkMode: () => {},
 });
 
@@ -108,6 +110,7 @@ const ThemeProvider: React.FC<IThemeProvider> = ({
               initializing,
               AppTheme,
               PaperTheme,
+              ElementsTheme,
               setDarkMode,
             }}>
             {children}

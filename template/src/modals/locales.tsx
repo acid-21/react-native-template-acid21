@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useCallback, useContext} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View} from 'react-native';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import {useTranslation} from 'react-i18next';
 import {CustomModal} from '../components/CustomModal';
@@ -46,20 +46,10 @@ export const LocalesModal: React.FC<Props> = ({}) => {
         keyExtractor={i => i.id}
         renderItem={renderItem}
         contentContainerStyle={{
-          ...styles.contentContainer,
+          flex: 1,
         }}
       />
       <View style={{height: 35}} />
     </CustomModal>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-  },
-  contentContainer: {
-    flex: 1,
-  },
-});
