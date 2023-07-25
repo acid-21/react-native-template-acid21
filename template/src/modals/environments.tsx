@@ -8,11 +8,13 @@ import {AppModals} from '../constants/modals';
 import {EnvironmentContext, IEnvironment} from '../context/environment';
 import {List, Text} from 'react-native-paper';
 import {useTheme} from '@react-navigation/native';
+import {AuthContext} from '../context/auth';
 
 type Props = {};
 
 export const EnvironmentsModal: React.FC<Props> = ({}) => {
   const {setOpenModal} = useContext(ModalsContext);
+  const {setAuth} = useContext(AuthContext);
   const {environments, changeEnvironment} = useContext(EnvironmentContext);
   const {colors} = useTheme();
 
@@ -22,6 +24,11 @@ export const EnvironmentsModal: React.FC<Props> = ({}) => {
       <View style={{width: '100%'}}>
         <List.Item
           onPress={() => {
+            setAuth({
+              isSignedIn: false,
+              user: null,
+              params: {},
+            });
             changeEnvironment(item);
             setOpenModal(AppModals.Environments, false);
           }}
@@ -33,7 +40,7 @@ export const EnvironmentsModal: React.FC<Props> = ({}) => {
         />
       </View>
     ),
-    [colors.text, changeEnvironment, setOpenModal],
+    [colors.text, changeEnvironment, setOpenModal, setAuth],
   );
 
   return (

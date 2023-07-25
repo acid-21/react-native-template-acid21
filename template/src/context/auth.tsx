@@ -36,9 +36,23 @@ const AuthProvider: React.FC<IAuthProvider> = ({children}) => {
 
   React.useEffect(() => {
     (async () => {
+      if (!initializing) {
+        try {
+          await AsyncStorage.setItem('auth', JSON.stringify(auth));
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    })();
+  }, [auth, initializing]);
+
+  React.useEffect(() => {
+    (async () => {
       setInitializing(true);
       try {
         const savedAuth = await AsyncStorage.getItem('auth');
+
+        console.log('savedAuth', savedAuth);
 
         if (savedAuth !== null) {
           setAuth(JSON.parse(savedAuth));

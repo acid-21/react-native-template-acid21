@@ -6,6 +6,8 @@ import {EnvironmentPinModal} from '../modals/environmentPin';
 import {UpdateModal} from '../modals/update';
 import {SignInModal} from '../modals/signIn';
 import {SignUpModal} from '../modals/signUp';
+import Toast from 'react-native-toast-message';
+import {toastConfig} from '../constants/common';
 
 export const Modals = () => {
   return (
@@ -16,6 +18,8 @@ export const Modals = () => {
       <UpdateModal />
       <SignInModal />
       <SignUpModal />
+
+      <Toast config={toastConfig} />
     </>
   );
 };

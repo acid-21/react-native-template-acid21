@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unstable-nested-components */
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {HomeNavigator} from './home';
 import {AppRoutes} from '../constants/routes';
@@ -9,6 +9,7 @@ import {useTranslation} from 'react-i18next';
 import {ProfielScreen} from '../screens/profile';
 import {AuthContext} from '../context/auth';
 import {SignInScreen} from '../screens/sign_in';
+import {APIFavoritesContext} from '../context/api/favorites';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,6 +17,15 @@ const BottomTabNavigator = () => {
   const {t} = useTranslation();
   const {auth} = useContext(AuthContext);
   const {isSignedIn} = auth || {};
+  const {favorites, getFavorites} = useContext(APIFavoritesContext);
+
+  useEffect(() => {
+    if (isSignedIn) {
+      setTimeout(() => {
+        getFavorites();
+      }, 1000);
+    }
+  }, [isSignedIn, getFavorites]);
 
   return (
     <>
@@ -66,7 +76,7 @@ const BottomTabNavigator = () => {
           options={{
             headerShown: false,
             title: t('general.favorites_screen'),
-            tabBarBadge: 3,
+            tabBarBadge: Object.keys(favorites).length,
           }}
           component={isSignedIn ? FavoritesScreen : SignInScreen}
         />

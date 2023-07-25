@@ -13,5 +13,31 @@
         "firebase-debug.*.log"
       ]
     }
-  ]
+  ],
+  "hosting": {
+    "public": "firebase/public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+       {
+        "source": "/dev/api/v1/sign_up",
+        "function": "dev-v1SignUpOnRequest"
+      },
+       {
+        "source": "/dev/api/v1/sign_in",
+        "function": "dev-v1SignInOnRequest"
+      },
+       {
+        "source": "/dev/api/v1/favorites",
+        "function": "dev-v1FavoritesOnRequest"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
 }

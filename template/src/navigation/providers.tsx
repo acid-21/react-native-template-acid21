@@ -2,12 +2,7 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import EnvironmentProvider from '../context/environment';
-import {
-  environments,
-  locales,
-  toastConfig,
-  updateData,
-} from '../constants/common';
+import {environments, locales, updateData} from '../constants/common';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import ModalsProvider from '../context/modals';
@@ -16,16 +11,15 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import AuthProvider from '../context/auth';
 import ThemeProvider, {ThemeContext} from '../context/theme';
 import getTheme from '../constants/theme';
-import Toast from 'react-native-toast-message';
 import APIProvider from '../context/api';
 import UpdateProvider from '../context/update';
+import APIProviders from './api_providers';
 
 const Navigation = ({children}: {children: any}) => {
   const {AppTheme} = React.useContext(ThemeContext);
   return (
     <>
       <NavigationContainer theme={AppTheme}>{children}</NavigationContainer>
-      <Toast config={toastConfig} />
     </>
   );
 };
@@ -42,7 +36,9 @@ const Providers = ({children}: {children: any}) => {
                   <ThemeProvider getTheme={getTheme}>
                     <APIProvider>
                       <UpdateProvider {...updateData}>
-                        <Navigation>{children}</Navigation>
+                        <APIProviders>
+                          <Navigation>{children}</Navigation>
+                        </APIProviders>
                       </UpdateProvider>
                     </APIProvider>
                   </ThemeProvider>

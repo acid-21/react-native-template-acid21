@@ -10,9 +10,12 @@
     "favorites_screen": "Favorites",
     "sign_in": "Sign In",
     "sign_up": "Sign Up",
+    "sign_out": "Sign Out",
     "email": "E-Mail",
     "password": "Password",
-    "confirm_password": "Confirm password"
+    "confirm_password": "Confirm password",
+    "error_title":"Ups! Something went wrong"
+
   },  
   "settings":{
     "change_language": "Change language",

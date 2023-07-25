@@ -12,6 +12,7 @@ export const AppNavigation = () => {
     <>
       <DrawerNavigator />
       <Modals />
+
       {isDebug && (
         <View
           style={{

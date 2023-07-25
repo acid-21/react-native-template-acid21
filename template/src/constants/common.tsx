@@ -8,9 +8,10 @@ import {NativeModules, Platform} from 'react-native';
 const {RNVersionInfo} = NativeModules;
 
 const getCustomHeaders = (auth: any, locale: string) => {
-  const {isLoggedIn = false} = auth || {};
+  const {isLoggedIn = false, user} = auth || {};
+  const {token} = user || {};
   return {
-    token: '123',
+    token,
     locale,
     isLoggedIn,
     version: (RNVersionInfo && RNVersionInfo.appVersion) || version,
@@ -27,8 +28,7 @@ export const environments: IEnvironment[] = [
     isDebugDefault: true,
     params: {
       axios: {
-        baseURL:
-          'https://us-central1-acid21-app-default.cloudfunctions.net/dev-',
+        baseURL: 'https://acid21-app-default.web.app/dev/api/v1',
         getCustomHeaders,
       },
     },
@@ -41,8 +41,7 @@ export const environments: IEnvironment[] = [
     isDebugDefault: false,
     params: {
       axios: {
-        baseURL:
-          'https://us-central1-acid21-app-default.cloudfunctions.net/prod-',
+        baseURL: 'https://acid21-app-default.web.app/prod/api/v1',
         getCustomHeaders,
       },
     },
@@ -55,8 +54,7 @@ export const environments: IEnvironment[] = [
     isDebugDefault: false,
     params: {
       axios: {
-        baseURL:
-          'https://us-central1-acid21-app-default.cloudfunctions.net/dev-',
+        baseURL: 'https://acid21-app-default.web.app/int/api/v1',
         getCustomHeaders,
       },
     },

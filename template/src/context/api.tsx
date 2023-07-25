@@ -51,7 +51,6 @@ const APIProvider: React.FC<IAPIProvider> = ({children}) => {
       ...client.defaults.headers.common,
       ...getCustomHeaders(auth, locale),
     };
-    setInitialized(true);
   }, [axiosConfig, auth, locale]);
 
   return (

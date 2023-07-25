@@ -10,9 +10,11 @@
     "favorites_screen": "Favoriten",
     "sign_in": "Anmelden",
     "sign_up": "Registrieren",
+    "sign_out": "Abmelden",
     "email": "E-Mail",
     "password": "Passwort",
-    "confirm_password": "Passwort bestätigen"
+    "confirm_password": "Passwort bestätigen",
+    "error_title":"Ups! Etwas ist schief gelaufen"
   },
   "settings":{
     "change_language": "Sprache ändern",

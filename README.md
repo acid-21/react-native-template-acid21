@@ -26,6 +26,8 @@ react native paper: https://reactnativepaper.com/
 
 App Icon Generator: https://www.appicon.co/
 
+Toasts: https://github.com/calintamas/react-native-toast-message#readme
+
 App theming:
 https://reactnavigation.org/docs/themes/
 https://callstack.github.io/react-native-paper/docs/guides/theming

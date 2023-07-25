@@ -3,12 +3,6 @@ import admin from "firebase-admin";
 import cors from "cors";
 import express from "express";
 
-let whitelist = [
-  "http://localhost:3000",
-  "https://react-most-wanted.com",
-  "https://www.react-most-wanted.com",
-];
-
 const corsOptions = {
   origin: true,
   optionsSuccessStatus: 200,
@@ -17,18 +11,30 @@ const corsOptions = {
 const app = express();
 app.use(cors(corsOptions));
 app.all("*", async (req, res) => {
-  functions.logger.info("API call", req.body);
-  functions.logger.info("API method", req.method);
-  functions.logger.info("API query", req.query);
-
   if (req.method !== "POST") {
     res.status(403).send("Forbidden!");
   }
 
   res.set("Content-Type", "application/json");
-  const { email, password } = req.body;
+  const { email, password, confirm_password } = req.body;
 
-  res.status(200).send({ success: true, email, password });
+  try {
+    const user = await admin.auth().getUserByEmail(email);
+
+    if (user) {
+      return res
+        .status(200)
+        .send({ success: true, user: { email, token: user.uid } });
+    } else {
+      res.status(403).send("Forbidden! - User does not exist");
+      return;
+    }
+  } catch (error) {
+    if (user) {
+      res.status(403).send("Forbidden! - User does not exist");
+      return;
+    }
+  }
 });
 
 export default functions.https.onRequest(app);
