@@ -5,4 +5,5 @@ export enum AppModals {
   UpdateModal = 'UPDATE_MODAL',
   SignIn = 'SIGN_IN_MODAL',
   SignUp = 'SIGN_UP_MODAL',
+  AddFavorit = 'ADD_FAVORIT_MODAL',
 }

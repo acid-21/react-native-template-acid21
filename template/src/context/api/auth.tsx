@@ -45,7 +45,7 @@ const APIAuthProvider: React.FC<IAPIAuthProvider> = ({children}) => {
         if (success) {
           setAuth({
             user,
-            isSignedIn: true,
+            isSignedIn: false,
             params: {},
           });
           return true;
@@ -57,7 +57,6 @@ const APIAuthProvider: React.FC<IAPIAuthProvider> = ({children}) => {
         if (axios.isAxiosError(error)) {
           errorMessage = error.response?.data;
         } else {
-          console.log('error', error);
           errorMessage = error;
         }
 
@@ -82,14 +81,13 @@ const APIAuthProvider: React.FC<IAPIAuthProvider> = ({children}) => {
           email,
           password,
         });
-        console.log('data', data);
 
         const {success, user} = data;
 
         if (success) {
           setAuth({
             user,
-            isSignedIn: true,
+            isSignedIn: false,
             params: {},
           });
           return true;
@@ -103,8 +101,6 @@ const APIAuthProvider: React.FC<IAPIAuthProvider> = ({children}) => {
         } else {
           errorMessage = error;
         }
-
-        console.log('error', errorMessage);
 
         Toast.show({
           type: 'error',

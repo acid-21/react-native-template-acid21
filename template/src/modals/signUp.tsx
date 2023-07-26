@@ -17,9 +17,9 @@ export const SignUpModal: React.FC<Props> = ({}) => {
   const {signUp} = useContext(APIAuthContext);
   const {setOpenModal} = useContext(ModalsContext);
   const [loading, setLoading] = React.useState(false);
-  const [email, setEmail] = React.useState('huber.tarik@gmail.com');
-  const [password, setPassword] = React.useState('123456');
-  const [confirmPassword, setConfirmPassword] = React.useState('123456');
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [confirmPassword, setConfirmPassword] = React.useState('');
   const {t} = useTranslation();
 
   const handleSignUp = React.useCallback(async () => {
@@ -28,6 +28,9 @@ export const SignUpModal: React.FC<Props> = ({}) => {
       const success = await signUp(email, password, confirmPassword);
       if (success) {
         setOpenModal(AppModals.SignUp, false);
+        setEmail('');
+        setPassword('');
+        setConfirmPassword('');
       }
     } catch (error) {
     } finally {

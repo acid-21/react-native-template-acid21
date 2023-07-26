@@ -3,18 +3,17 @@ import React, {useContext} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {useTranslation} from 'react-i18next';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {AppRoutes} from '../../constants/routes';
-import {ModalsContext} from '../../context/modals';
-import {LocaleContext} from '../../context/locales';
-import {AppModals} from '../../constants/modals';
-import {EnvironmentContext} from '../../context/environment';
+import {AppRoutes} from '../constants/routes';
+import {ModalsContext} from '../context/modals';
+import {LocaleContext} from '../context/locales';
+import {AppModals} from '../constants/modals';
+import {EnvironmentContext} from '../context/environment';
 import {List} from 'react-native-paper';
 import {Icon} from '@rneui/themed';
 import {Switch} from 'react-native-paper';
 import {useTheme} from '@react-navigation/native';
-import {ThemeContext} from '../../context/theme';
-import {APIContext} from '../../context/api';
-import {UpdateContext} from '../../context/update';
+import {ThemeContext} from '../context/theme';
+import {UpdateContext} from '../context/update';
 
 type Props = {
   navigation: StackNavigationProp<any, AppRoutes.Settings>;
@@ -27,14 +26,7 @@ export const SettingsScreen: React.FC<Props> = ({}) => {
   const {environment} = React.useContext(EnvironmentContext);
   const {colors} = useTheme();
   const {isDarkMode, setDarkMode} = useContext(ThemeContext);
-  const {client} = useContext(APIContext);
   const {checkForUpdate, changeCheckForUpdate} = useContext(UpdateContext);
-
-  console.log('client settings screen', client?.defaults.baseURL);
-  console.log(
-    'client headers settings screen',
-    client?.defaults.headers.common,
-  );
 
   return (
     <View style={styles.container}>

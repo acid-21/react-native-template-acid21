@@ -8,6 +8,8 @@ import {AuthContext} from '../auth';
 
 export type APIFavoritesContextType = {
   getFavorites: () => Promise<void>;
+  addFavorite: (name: string) => Promise<void>;
+  deleteFavorite: (uid: string) => Promise<void>;
   loading: boolean;
   favorites: any;
 };
@@ -18,6 +20,8 @@ export interface IAPIFavoritesProvider {
 export const APIFavoritesContext = React.createContext<APIFavoritesContextType>(
   {
     getFavorites: async () => {},
+    addFavorite: async () => {},
+    deleteFavorite: async () => {},
     loading: false,
     favorites: [],
   },
@@ -58,8 +62,6 @@ const APIFavoritesProvider: React.FC<IAPIFavoritesProvider> = ({children}) => {
       try {
         const savedData = await AsyncStorage.getItem('api_favorites');
 
-        console.log('savedData', savedData);
-
         if (savedData !== null) {
           setFavorites(JSON.parse(savedData));
         }
@@ -71,19 +73,8 @@ const APIFavoritesProvider: React.FC<IAPIFavoritesProvider> = ({children}) => {
     })();
   }, []);
 
-  const getFavorites = React.useCallback(async () => {
-    try {
-      setLoading(true);
-      console.log('client headers', client.defaults.headers);
-      const {data} = await client.get('/favorites');
-      console.log('data', data);
-
-      const {success, favorites: databaseFavorites} = data;
-
-      if (success) {
-        setFavorites(databaseFavorites);
-      }
-    } catch (error) {
+  const handleError = React.useCallback(
+    (error: any) => {
       let errorMessage;
       if (axios.isAxiosError(error)) {
         errorMessage = error.response?.data;
@@ -98,13 +89,70 @@ const APIFavoritesProvider: React.FC<IAPIFavoritesProvider> = ({children}) => {
         text2: errorMessage,
         position: 'top',
       });
+    },
+    [t],
+  );
+
+  const getFavorites = React.useCallback(async () => {
+    try {
+      setLoading(true);
+      const {data} = await client.get('/favorites');
+
+      const {success, favorites: databaseFavorites} = data;
+
+      if (success) {
+        setFavorites(databaseFavorites);
+      }
+    } catch (error) {
+      handleError(error);
     } finally {
       setLoading(false);
     }
-  }, [client, t]);
+  }, [client, handleError]);
+
+  const addFavorite = React.useCallback(
+    async (name: string) => {
+      try {
+        setLoading(true);
+        const {data} = await client.post('/favorites', {name});
+
+        const {success, favorites: databaseFavorites} = data;
+
+        if (success) {
+          setFavorites(databaseFavorites);
+        }
+      } catch (error) {
+        handleError(error);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [client, handleError],
+  );
+
+  const deleteFavorite = React.useCallback(
+    async (uid: string) => {
+      try {
+        setLoading(true);
+        const {data} = await client.delete(`/favorites?uid=${uid}`);
+
+        const {success, favorites: databaseFavorites} = data;
+
+        if (success) {
+          setFavorites(databaseFavorites);
+        }
+      } catch (error) {
+        handleError(error);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [client, handleError],
+  );
 
   return (
-    <APIFavoritesContext.Provider value={{getFavorites, favorites, loading}}>
+    <APIFavoritesContext.Provider
+      value={{getFavorites, addFavorite, deleteFavorite, favorites, loading}}>
       {children}
     </APIFavoritesContext.Provider>
   );

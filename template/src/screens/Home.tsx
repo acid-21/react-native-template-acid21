@@ -2,8 +2,8 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {AppRoutes} from '../../constants/routes';
-import {Title} from '../../components/Title';
+import {AppRoutes} from '../constants/routes';
+import {Title} from '../components/Title';
 import {Button} from 'react-native-paper';
 import Toast from 'react-native-toast-message';
 

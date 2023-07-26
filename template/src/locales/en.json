@@ -14,7 +14,13 @@
     "email": "E-Mail",
     "password": "Password",
     "confirm_password": "Confirm password",
-    "error_title":"Ups! Something went wrong"
+    "error_title":"Ups! Something went wrong",
+    "add_favorite_title": "Add favorite",
+    "add_favorite": "Add",
+    "delete_favorite_title": "Delete",
+    "delete_favorite_message": "Delete favorite?",
+    "confirm_delete": "Delete",
+    "cancel": "Cancel"
 
   },  
   "settings":{

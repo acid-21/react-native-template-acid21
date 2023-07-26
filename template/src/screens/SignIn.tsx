@@ -1,9 +1,9 @@
 import React, {useContext, useEffect} from 'react';
 import {View} from 'react-native';
-import {Title} from '../../components/Title';
+import {Title} from '../components/Title';
 import {useTranslation} from 'react-i18next';
-import {ModalsContext} from '../../context/modals';
-import {AppModals} from '../../constants/modals';
+import {ModalsContext} from '../context/modals';
+import {AppModals} from '../constants/modals';
 import {Button} from 'react-native-paper';
 
 export const SignInScreen = () => {

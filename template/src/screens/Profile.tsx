@@ -2,11 +2,11 @@
 import React, {useContext} from 'react';
 import {View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {Title} from '../../components/Title';
+import {Title} from '../components/Title';
 import {useTranslation} from 'react-i18next';
-import {AuthContext} from '../../context/auth';
+import {AuthContext} from '../context/auth';
 import {Avatar, Button, Text} from 'react-native-paper';
-import {AppRoutes} from '../../constants/routes';
+import {AppRoutes} from '../constants/routes';
 
 type Props = {
   navigation: StackNavigationProp<any, AppRoutes.Home>;

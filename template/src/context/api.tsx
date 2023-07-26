@@ -3,8 +3,9 @@ import axios, {AxiosInstance} from 'axios';
 import {EnvironmentContext} from './environment';
 import {AuthContext} from './auth';
 import {LocaleContext} from './locales';
+import {getCustomHeaders} from '../constants/common';
 
-const client = axios.create({});
+let client = axios.create();
 
 export type APIContextType = {
   client: AxiosInstance;
@@ -22,10 +23,11 @@ export const APIContext = React.createContext<APIContextType>({
 const APIProvider: React.FC<IAPIProvider> = ({children}) => {
   const [initialized, setInitialized] = React.useState<boolean>(false);
   const {environment} = React.useContext(EnvironmentContext);
-  const {auth} = React.useContext(AuthContext);
+  const {auth, setAuth} = React.useContext(AuthContext);
   const {locale} = React.useContext(LocaleContext);
   const {params} = environment || ({params: {}} as any);
   const {axios: axiosConfig} = params || ({baseURL: ''} as any);
+  const {user} = auth || {};
 
   React.useEffect(() => {
     const {
@@ -41,17 +43,21 @@ const APIProvider: React.FC<IAPIProvider> = ({children}) => {
     };
     setInitialized(true);
   }, [axiosConfig]);
+
   React.useEffect(() => {
-    const {
-      getCustomHeaders = () => {
-        return {};
-      },
-    } = axiosConfig || {baseURL: ''};
     client.defaults.headers.common = {
       ...client.defaults.headers.common,
-      ...getCustomHeaders(auth, locale),
+      ...getCustomHeaders(user, locale),
     };
-  }, [axiosConfig, auth, locale]);
+
+    if (user?.token) {
+      setAuth({
+        user,
+        isSignedIn: true,
+        params: {},
+      });
+    }
+  }, [user, locale, setAuth]);
 
   return (
     <APIContext.Provider value={{client, initialized}}>

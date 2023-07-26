@@ -3,29 +3,28 @@ import React, {useContext, useEffect} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {HomeNavigator} from './home';
 import {AppRoutes} from '../constants/routes';
-import {FavoritesScreen} from '../screens/favorites';
+import {FavoritesScreen} from '../screens/Favorites';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useTranslation} from 'react-i18next';
-import {ProfielScreen} from '../screens/profile';
+import {ProfielScreen} from '../screens/Profile';
 import {AuthContext} from '../context/auth';
-import {SignInScreen} from '../screens/sign_in';
+import {SignInScreen} from '../screens/SignIn';
 import {APIFavoritesContext} from '../context/api/favorites';
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
   const {t} = useTranslation();
-  const {auth} = useContext(AuthContext);
+  const {auth, initializing} = useContext(AuthContext);
+
   const {isSignedIn} = auth || {};
   const {favorites, getFavorites} = useContext(APIFavoritesContext);
 
   useEffect(() => {
     if (isSignedIn) {
-      setTimeout(() => {
-        getFavorites();
-      }, 1000);
+      getFavorites();
     }
-  }, [isSignedIn, getFavorites]);
+  }, [isSignedIn, getFavorites, initializing]);
 
   return (
     <>
@@ -45,6 +44,9 @@ const BottomTabNavigator = () => {
             borderWidth: 0,
             borderTopWidth: 0,
             //shadowColor: '#000',
+          },
+          safeAreaInsets: {
+            bottom: 60,
           },
           tabBarLabelPosition: 'below-icon',
           tabBarIcon: ({focused, color, size}) => {
@@ -76,7 +78,9 @@ const BottomTabNavigator = () => {
           options={{
             headerShown: false,
             title: t('general.favorites_screen'),
-            tabBarBadge: Object.keys(favorites).length,
+            tabBarBadge: Object.keys(favorites).length
+              ? Object.keys(favorites).length
+              : undefined,
           }}
           component={isSignedIn ? FavoritesScreen : SignInScreen}
         />

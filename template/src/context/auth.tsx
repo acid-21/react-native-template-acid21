@@ -10,6 +10,7 @@ export interface IAuth {
 export type AuthContextType = {
   auth: IAuth;
   initializing: boolean;
+  ready: boolean;
   setAuth: (auth: IAuth) => void;
 };
 export interface IAuthProvider {
@@ -23,6 +24,7 @@ export const AuthContext = React.createContext<AuthContextType>({
     params: {},
   },
   initializing: true,
+  ready: false,
   setAuth: () => {},
 });
 
@@ -33,6 +35,8 @@ const AuthProvider: React.FC<IAuthProvider> = ({children}) => {
     isSignedIn: false,
     params: {},
   });
+
+  const ready = auth.isSignedIn && !initializing;
 
   React.useEffect(() => {
     (async () => {
@@ -52,10 +56,9 @@ const AuthProvider: React.FC<IAuthProvider> = ({children}) => {
       try {
         const savedAuth = await AsyncStorage.getItem('auth');
 
-        console.log('savedAuth', savedAuth);
-
         if (savedAuth !== null) {
-          setAuth(JSON.parse(savedAuth));
+          const {user, params} = JSON.parse(savedAuth);
+          setAuth({user, params, isSignedIn: false});
         }
       } catch (error) {
         console.error(error);
@@ -66,7 +69,7 @@ const AuthProvider: React.FC<IAuthProvider> = ({children}) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{auth, setAuth, initializing}}>
+    <AuthContext.Provider value={{auth, setAuth, initializing, ready}}>
       {children}
     </AuthContext.Provider>
   );

@@ -16,8 +16,8 @@ export const SignInModal: React.FC<Props> = ({}) => {
   const [loading, setLoading] = React.useState(false);
 
   const [showPassword, setShowPassword] = React.useState(false);
-  const [email, setEmail] = React.useState('huber.tarik@gmail.com');
-  const [password, setPassword] = React.useState('123456');
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
   const {setOpenModal} = useContext(ModalsContext);
   const {signIn} = useContext(APIAuthContext);
@@ -26,9 +26,10 @@ export const SignInModal: React.FC<Props> = ({}) => {
   const handleSignIn = React.useCallback(async () => {
     setLoading(true);
     try {
-      console.log('email', email);
       const success = await signIn(email, password);
       if (success) {
+        setEmail('');
+        setPassword('');
         setOpenModal(AppModals.SignIn, false);
       }
     } catch (error) {

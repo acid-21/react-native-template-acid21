@@ -14,7 +14,13 @@
     "email": "E-Mail",
     "password": "Passwort",
     "confirm_password": "Passwort bestätigen",
-    "error_title":"Ups! Etwas ist schief gelaufen"
+    "error_title":"Ups! Etwas ist schief gelaufen",
+    "add_favorite_title": "Favorit hinzufügen",
+    "add_favorite": "Hinzufügen",
+    "delete_favorite_title": "Löschen",
+    "delete_favorite_message": "Favoriten löschen?",
+    "confirm_delete": "Löschen",
+    "cancel": "Abbrechen"
   },
   "settings":{
     "change_language": "Sprache ändern",

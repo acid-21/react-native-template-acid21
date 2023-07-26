@@ -17,8 +17,6 @@ try {
   defaultLocaleID = defaultLocale.toString().substring(0, 2);
 } catch (error) {}
 
-console.log('defaultLocale', defaultLocaleID);
-
 i18n.use(initReactI18next).init({
   resources: {},
   lng: defaultLocaleID,

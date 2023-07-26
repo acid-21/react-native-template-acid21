@@ -7,13 +7,11 @@ import {NativeModules, Platform} from 'react-native';
 
 const {RNVersionInfo} = NativeModules;
 
-const getCustomHeaders = (auth: any, locale: string) => {
-  const {isLoggedIn = false, user} = auth || {};
-  const {token} = user || {};
+export const getCustomHeaders = (user: any, locale: string) => {
+  const {token = ''} = user || {};
   return {
-    token,
+    token: `${token}`,
     locale,
-    isLoggedIn,
     version: (RNVersionInfo && RNVersionInfo.appVersion) || version,
     platform: Platform.OS,
   };
@@ -29,7 +27,6 @@ export const environments: IEnvironment[] = [
     params: {
       axios: {
         baseURL: 'https://acid21-app-default.web.app/dev/api/v1',
-        getCustomHeaders,
       },
     },
   },
@@ -42,7 +39,6 @@ export const environments: IEnvironment[] = [
     params: {
       axios: {
         baseURL: 'https://acid21-app-default.web.app/prod/api/v1',
-        getCustomHeaders,
       },
     },
   },
@@ -55,7 +51,6 @@ export const environments: IEnvironment[] = [
     params: {
       axios: {
         baseURL: 'https://acid21-app-default.web.app/int/api/v1',
-        getCustomHeaders,
       },
     },
   },

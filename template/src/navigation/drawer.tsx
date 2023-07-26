@@ -1,7 +1,7 @@
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {SettingsScreen} from '../screens/settings';
+import {SettingsScreen} from '../screens/Settings';
 import BottomTabNavigator from './bottom';
 import {AppRoutes} from '../constants/routes';
 
