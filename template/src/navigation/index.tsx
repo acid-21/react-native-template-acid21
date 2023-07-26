@@ -1,12 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
-import * as React from 'react';
+import React, {useContext} from 'react';
 import {Modals} from './modals';
 import DrawerNavigator from './drawer';
 import {View} from 'react-native';
 import {EnvironmentContext} from '../context/environment';
 
 export const AppNavigation = () => {
-  const {environment} = React.useContext(EnvironmentContext);
+  const {environment} = useContext(EnvironmentContext);
   const {isDebug = false} = environment || {isDebug: false};
   return (
     <>

@@ -19,7 +19,7 @@ type Props = {
 
 export const FavoritesScreen: React.FC<Props> = ({}) => {
   const {favorites, loading, getFavorites, deleteFavorite} =
-    React.useContext(APIFavoritesContext);
+    useContext(APIFavoritesContext);
   const [key, setKey] = useState<string>('');
   const {setOpenModal} = useContext(ModalsContext);
   const theme = useTheme();

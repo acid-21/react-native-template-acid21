@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState, useEffect, createContext} from 'react';
 import {StatusBar, useColorScheme} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {ThemeProvider as ElementsProvider, createTheme} from '@rneui/themed';
@@ -37,7 +37,7 @@ export interface IThemeProvider {
   getTheme: (theme: any, isDarkMode: boolean, type: string) => any;
 }
 
-export const ThemeContext = React.createContext<ThemeContextType>({
+export const ThemeContext = createContext<ThemeContextType>({
   isDarkMode: false,
   initializing: true,
   AppTheme: LightTheme,
@@ -53,8 +53,8 @@ const ThemeProvider: React.FC<IThemeProvider> = ({
   },
 }) => {
   const scheme = useColorScheme();
-  const [isDarkMode, setIsDarkMode] = React.useState<boolean>(false);
-  const [initializing, setInitializing] = React.useState<boolean>(true);
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+  const [initializing, setInitializing] = useState<boolean>(true);
 
   const theme = isDarkMode ? DarkTheme : LightTheme;
   const paperTheme = isDarkMode ? MD3DarkTheme : MD3LightTheme;
@@ -66,7 +66,7 @@ const ThemeProvider: React.FC<IThemeProvider> = ({
   const PaperTheme = getTheme(paperTheme, isDarkMode, 'paper');
   const ElementsTheme = getTheme(elementsTheem, isDarkMode, 'paper');
 
-  React.useEffect(() => {
+  useEffect(() => {
     (async () => {
       setInitializing(true);
       try {

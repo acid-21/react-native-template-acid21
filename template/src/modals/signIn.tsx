@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useContext} from 'react';
+import React, {useContext, useState, useCallback} from 'react';
 import {View} from 'react-native';
 import {CustomModal} from '../components/CustomModal';
 import {ModalsContext} from '../context/modals';
@@ -13,17 +13,15 @@ import Toast from 'react-native-toast-message';
 type Props = {};
 
 export const SignInModal: React.FC<Props> = ({}) => {
-  const [loading, setLoading] = React.useState(false);
-
-  const [showPassword, setShowPassword] = React.useState(false);
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const {setOpenModal} = useContext(ModalsContext);
   const {signIn} = useContext(APIAuthContext);
   const {t} = useTranslation();
 
-  const handleSignIn = React.useCallback(async () => {
+  const handleSignIn = useCallback(async () => {
     setLoading(true);
     try {
       const success = await signIn(email, password);

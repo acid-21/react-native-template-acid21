@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useEffect, createContext, useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export interface IAuth {
@@ -17,7 +17,7 @@ export interface IAuthProvider {
   children: React.ReactNode;
 }
 
-export const AuthContext = React.createContext<AuthContextType>({
+export const AuthContext = createContext<AuthContextType>({
   auth: {
     user: null,
     isSignedIn: false,
@@ -29,8 +29,8 @@ export const AuthContext = React.createContext<AuthContextType>({
 });
 
 const AuthProvider: React.FC<IAuthProvider> = ({children}) => {
-  const [initializing, setInitializing] = React.useState<boolean>(true);
-  const [auth, setAuth] = React.useState<IAuth>({
+  const [initializing, setInitializing] = useState<boolean>(true);
+  const [auth, setAuth] = useState<IAuth>({
     user: null,
     isSignedIn: false,
     params: {},
@@ -38,7 +38,7 @@ const AuthProvider: React.FC<IAuthProvider> = ({children}) => {
 
   const ready = auth.isSignedIn && !initializing;
 
-  React.useEffect(() => {
+  useEffect(() => {
     (async () => {
       if (!initializing) {
         try {
@@ -50,7 +50,7 @@ const AuthProvider: React.FC<IAuthProvider> = ({children}) => {
     })();
   }, [auth, initializing]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     (async () => {
       setInitializing(true);
       try {

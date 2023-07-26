@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState, createContext, useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export interface IEnvironment {
@@ -20,7 +20,7 @@ export type EnvironmentContextType = {
   changeEnvironment: (environment: IEnvironment) => void;
 };
 
-export const EnvironmentContext = React.createContext<EnvironmentContextType>({
+export const EnvironmentContext = createContext<EnvironmentContextType>({
   environment: undefined,
   initializing: true,
   environments: [],
@@ -37,10 +37,10 @@ const EnvironmentProvider: React.FC<IEnvironmentProvider> = ({
     }) || environments[0];
 
   const [environment, setEnvironment] =
-    React.useState<IEnvironment>(defaultEnvironment);
-  const [initializing, setInitializing] = React.useState<boolean>(true);
+    useState<IEnvironment>(defaultEnvironment);
+  const [initializing, setInitializing] = useState<boolean>(true);
 
-  React.useEffect(() => {
+  useEffect(() => {
     (async () => {
       setInitializing(true);
       try {

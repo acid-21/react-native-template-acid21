@@ -1,4 +1,10 @@
-import * as React from 'react';
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  createContext,
+  useContext,
+} from 'react';
 import checkVersion from 'react-native-store-version';
 import {Linking, Platform} from 'react-native';
 import {ModalsContext} from './modals';
@@ -22,7 +28,7 @@ export interface IUpdateProvider {
   country: string;
 }
 
-export const UpdateContext = React.createContext<UpdateContextType>({
+export const UpdateContext = createContext<UpdateContextType>({
   updateAwailable: false,
   updateVersion: '',
   runUpdate: () => {},
@@ -38,12 +44,12 @@ const UpdateProvider: React.FC<IUpdateProvider> = ({
   updateIOSURL,
   country,
 }) => {
-  const [checkForUpdate, setCheckForUpdate] = React.useState<boolean>(false);
-  const [updateAwailable, setUpdateAwailable] = React.useState<boolean>(false);
-  const [updateVersion, setUpdateVersion] = React.useState<string>(version);
-  const {setOpenModal} = React.useContext(ModalsContext);
+  const [checkForUpdate, setCheckForUpdate] = useState<boolean>(false);
+  const [updateAwailable, setUpdateAwailable] = useState<boolean>(false);
+  const [updateVersion, setUpdateVersion] = useState<string>(version);
+  const {setOpenModal} = useContext(ModalsContext);
 
-  React.useEffect(() => {
+  useEffect(() => {
     (async () => {
       try {
         const savedCheckForUpdate = await AsyncStorage.getItem(
@@ -61,12 +67,12 @@ const UpdateProvider: React.FC<IUpdateProvider> = ({
     })();
   }, []);
 
-  const changeCheckForUpdate = React.useCallback(async (check: boolean) => {
+  const changeCheckForUpdate = useCallback(async (check: boolean) => {
     setCheckForUpdate(check);
     AsyncStorage.setItem('CheckForUpdate', check ? 'true' : 'false');
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const init = async () => {
       if (!checkForUpdate) {
         return;
@@ -98,7 +104,7 @@ const UpdateProvider: React.FC<IUpdateProvider> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [androidStoreURL, country, iosStoreURL, checkForUpdate]);
 
-  const runUpdate = React.useCallback(() => {
+  const runUpdate = useCallback(() => {
     let link = updateAndroidURL;
 
     if (Platform.OS === 'ios') {

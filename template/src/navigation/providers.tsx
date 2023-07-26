@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import * as React from 'react';
+import React, {useContext} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import EnvironmentProvider from '../context/environment';
 import {environments, locales, updateData} from '../constants/common';
@@ -16,7 +16,7 @@ import UpdateProvider from '../context/update';
 import APIProviders from './api_providers';
 
 const Navigation = ({children}: {children: any}) => {
-  const {AppTheme} = React.useContext(ThemeContext);
+  const {AppTheme} = useContext(ThemeContext);
   return (
     <>
       <NavigationContainer theme={AppTheme}>{children}</NavigationContainer>

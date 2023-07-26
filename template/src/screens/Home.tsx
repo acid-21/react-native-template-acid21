@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {useTranslation} from 'react-i18next';
 import {View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -14,7 +14,7 @@ type Props = {
 export const HomeScreen: React.FC<Props> = () => {
   const {t} = useTranslation();
 
-  const showToast = React.useCallback(() => {
+  const showToast = useCallback(() => {
     Toast.show({
       type: 'success',
       visibilityTime: 6000,

@@ -21,9 +21,9 @@ type Props = {
 
 export const SettingsScreen: React.FC<Props> = ({}) => {
   const {t} = useTranslation();
-  const {locale} = React.useContext(LocaleContext);
-  const {setOpenModal} = React.useContext(ModalsContext);
-  const {environment} = React.useContext(EnvironmentContext);
+  const {locale} = useContext(LocaleContext);
+  const {setOpenModal} = useContext(ModalsContext);
+  const {environment} = useContext(EnvironmentContext);
   const {colors} = useTheme();
   const {isDarkMode, setDarkMode} = useContext(ThemeContext);
   const {checkForUpdate, changeCheckForUpdate} = useContext(UpdateContext);

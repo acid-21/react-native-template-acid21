@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {View} from 'react-native';
 import {CustomModal} from '../components/CustomModal';
 import {ModalsContext} from '../context/modals';
@@ -12,7 +12,7 @@ import {APIFavoritesContext} from '../context/api/favorites';
 type Props = {};
 
 export const AddFavoriteModal: React.FC<Props> = ({}) => {
-  const [name, setName] = React.useState('');
+  const [name, setName] = useState('');
 
   const {setOpenModal} = useContext(ModalsContext);
   const {addFavorite, loading} = useContext(APIFavoritesContext);

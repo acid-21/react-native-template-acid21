@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState, createContext, useCallback} from 'react';
 
 export type ModalContextType = {
   isOpenModal: (name: string) => boolean;
@@ -8,13 +8,13 @@ export interface IModalsProvider {
   children: React.ReactNode;
 }
 
-export const ModalsContext = React.createContext<ModalContextType>({
+export const ModalsContext = createContext<ModalContextType>({
   isOpenModal: () => false,
   setOpenModal: () => {},
 });
 
 const ModalsProvider: React.FC<IModalsProvider> = ({children}) => {
-  const [modals, setModals] = React.useState<any>({});
+  const [modals, setModals] = useState<any>({});
 
   const setOpenModal = (
     name: string,
@@ -30,7 +30,7 @@ const ModalsProvider: React.FC<IModalsProvider> = ({children}) => {
     }
   };
 
-  const isOpenModal = React.useCallback(
+  const isOpenModal = useCallback(
     (name: string): boolean => {
       return modals ? modals[name] : false;
     },

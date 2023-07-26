@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useContext} from 'react';
+import React, {useContext, useState, useCallback} from 'react';
 import {View} from 'react-native';
 import {CustomModal} from '../components/CustomModal';
 import {AppModals} from '../constants/modals';
@@ -13,16 +13,16 @@ import {ModalsContext} from '../context/modals';
 type Props = {};
 
 export const SignUpModal: React.FC<Props> = ({}) => {
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const {signUp} = useContext(APIAuthContext);
   const {setOpenModal} = useContext(ModalsContext);
-  const [loading, setLoading] = React.useState(false);
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [confirmPassword, setConfirmPassword] = React.useState('');
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const {t} = useTranslation();
 
-  const handleSignUp = React.useCallback(async () => {
+  const handleSignUp = useCallback(async () => {
     setLoading(true);
     try {
       const success = await signUp(email, password, confirmPassword);

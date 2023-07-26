@@ -1,4 +1,10 @@
-import React, {useCallback, useEffect, useMemo, useRef} from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useContext,
+} from 'react';
 import {BottomSheetModal, BottomSheetBackdrop} from '@gorhom/bottom-sheet';
 import {Keyboard} from 'react-native';
 import {BottomSheetDefaultBackdropProps} from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetBackdrop/types';
@@ -23,9 +29,9 @@ export const CustomModal: React.FC<Props> = ({
   modalProps,
   snapOnKeybaoard = false,
 }) => {
-  const {PaperTheme, ElementsTheme} = React.useContext(ThemeContext);
+  const {PaperTheme, ElementsTheme} = useContext(ThemeContext);
   const {colors} = useTheme();
-  const {isOpenModal, setOpenModal} = React.useContext(ModalsContext);
+  const {isOpenModal, setOpenModal} = useContext(ModalsContext);
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 

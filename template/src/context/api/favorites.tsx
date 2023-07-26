@@ -1,4 +1,10 @@
-import * as React from 'react';
+import React, {
+  useState,
+  useContext,
+  useEffect,
+  createContext,
+  useCallback,
+} from 'react';
 import {APIContext} from '../api';
 import axios from 'axios';
 import Toast from 'react-native-toast-message';
@@ -17,31 +23,29 @@ export interface IAPIFavoritesProvider {
   children: React.ReactNode;
 }
 
-export const APIFavoritesContext = React.createContext<APIFavoritesContextType>(
-  {
-    getFavorites: async () => {},
-    addFavorite: async () => {},
-    deleteFavorite: async () => {},
-    loading: false,
-    favorites: [],
-  },
-);
+export const APIFavoritesContext = createContext<APIFavoritesContextType>({
+  getFavorites: async () => {},
+  addFavorite: async () => {},
+  deleteFavorite: async () => {},
+  loading: false,
+  favorites: [],
+});
 
 const APIFavoritesProvider: React.FC<IAPIFavoritesProvider> = ({children}) => {
-  const [initializing, setInitializing] = React.useState(true);
-  const [loading, setLoading] = React.useState(false);
-  const [favorites, setFavorites] = React.useState({});
-  const {client} = React.useContext(APIContext);
-  const {auth} = React.useContext(AuthContext);
+  const [initializing, setInitializing] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [favorites, setFavorites] = useState({});
+  const {client} = useContext(APIContext);
+  const {auth} = useContext(AuthContext);
   const {t} = useTranslation();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!auth?.isSignedIn) {
       setFavorites({});
     }
   }, [auth]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     (async () => {
       if (!initializing) {
         try {
@@ -56,7 +60,7 @@ const APIFavoritesProvider: React.FC<IAPIFavoritesProvider> = ({children}) => {
     })();
   }, [favorites, initializing]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     (async () => {
       setInitializing(true);
       try {
@@ -73,7 +77,7 @@ const APIFavoritesProvider: React.FC<IAPIFavoritesProvider> = ({children}) => {
     })();
   }, []);
 
-  const handleError = React.useCallback(
+  const handleError = useCallback(
     (error: any) => {
       let errorMessage;
       if (axios.isAxiosError(error)) {
@@ -93,7 +97,7 @@ const APIFavoritesProvider: React.FC<IAPIFavoritesProvider> = ({children}) => {
     [t],
   );
 
-  const getFavorites = React.useCallback(async () => {
+  const getFavorites = useCallback(async () => {
     try {
       setLoading(true);
       const {data} = await client.get('/favorites');
@@ -110,7 +114,7 @@ const APIFavoritesProvider: React.FC<IAPIFavoritesProvider> = ({children}) => {
     }
   }, [client, handleError]);
 
-  const addFavorite = React.useCallback(
+  const addFavorite = useCallback(
     async (name: string) => {
       try {
         setLoading(true);
@@ -130,7 +134,7 @@ const APIFavoritesProvider: React.FC<IAPIFavoritesProvider> = ({children}) => {
     [client, handleError],
   );
 
-  const deleteFavorite = React.useCallback(
+  const deleteFavorite = useCallback(
     async (uid: string) => {
       try {
         setLoading(true);

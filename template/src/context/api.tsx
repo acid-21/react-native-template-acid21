@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {createContext, useContext, useState, useEffect} from 'react';
 import axios, {AxiosInstance} from 'axios';
 import {EnvironmentContext} from './environment';
 import {AuthContext} from './auth';
@@ -15,21 +15,21 @@ export interface IAPIProvider {
   children: React.ReactNode;
 }
 
-export const APIContext = React.createContext<APIContextType>({
+export const APIContext = createContext<APIContextType>({
   client: client,
   initialized: false,
 });
 
 const APIProvider: React.FC<IAPIProvider> = ({children}) => {
-  const [initialized, setInitialized] = React.useState<boolean>(false);
-  const {environment} = React.useContext(EnvironmentContext);
-  const {auth, setAuth} = React.useContext(AuthContext);
-  const {locale} = React.useContext(LocaleContext);
+  const [initialized, setInitialized] = useState<boolean>(false);
+  const {environment} = useContext(EnvironmentContext);
+  const {auth, setAuth} = useContext(AuthContext);
+  const {locale} = useContext(LocaleContext);
   const {params} = environment || ({params: {}} as any);
   const {axios: axiosConfig} = params || ({baseURL: ''} as any);
   const {user} = auth || {};
 
-  React.useEffect(() => {
+  useEffect(() => {
     const {
       baseURL,
       timeout = 15000,
@@ -44,7 +44,7 @@ const APIProvider: React.FC<IAPIProvider> = ({children}) => {
     setInitialized(true);
   }, [axiosConfig]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     client.defaults.headers.common = {
       ...client.defaults.headers.common,
       ...getCustomHeaders(user, locale),

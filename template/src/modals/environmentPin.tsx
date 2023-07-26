@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {View} from 'react-native';
 import {CustomModal} from '../components/CustomModal';
 import {ModalsContext} from '../context/modals';
@@ -12,7 +12,7 @@ import {Title} from '../components/Title';
 type Props = {};
 
 export const EnvironmentPinModal: React.FC<Props> = ({}) => {
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const {setOpenModal} = useContext(ModalsContext);
   const {t} = useTranslation();

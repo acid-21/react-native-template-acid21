@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useContext, createContext, useCallback} from 'react';
 import {APIContext} from '../api';
 import axios from 'axios';
 import Toast from 'react-native-toast-message';
@@ -17,7 +17,7 @@ export interface IAPIAuthProvider {
   children: React.ReactNode;
 }
 
-export const APIAuthContext = React.createContext<APIAuthContextType>({
+export const APIAuthContext = createContext<APIAuthContextType>({
   signUp: async () => {
     return false;
   },
@@ -27,11 +27,11 @@ export const APIAuthContext = React.createContext<APIAuthContextType>({
 });
 
 const APIAuthProvider: React.FC<IAPIAuthProvider> = ({children}) => {
-  const {client} = React.useContext(APIContext);
-  const {setAuth} = React.useContext(AuthContext);
+  const {client} = useContext(APIContext);
+  const {setAuth} = useContext(AuthContext);
   const {t} = useTranslation();
 
-  const signUp = React.useCallback(
+  const signUp = useCallback(
     async (email: string, password: string, confirm_password: string) => {
       try {
         const {data} = await client.post('/sign_up', {
@@ -74,7 +74,7 @@ const APIAuthProvider: React.FC<IAPIAuthProvider> = ({children}) => {
     [client, setAuth, t],
   );
 
-  const signIn = React.useCallback(
+  const signIn = useCallback(
     async (email: string, password: string) => {
       try {
         const {data} = await client.post('/sign_in', {

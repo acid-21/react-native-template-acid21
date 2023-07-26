@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useEffect, createContext, useState} from 'react';
 import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
 import {NativeModules, Platform} from 'react-native';
@@ -45,7 +45,7 @@ export interface ILocalesProvider {
   locales: ILocale[];
 }
 
-export const LocaleContext = React.createContext<LocaleContextType>({
+export const LocaleContext = createContext<LocaleContextType>({
   locale: defaultLocale,
   initializing: true,
   changeLocale: () => {},
@@ -53,10 +53,10 @@ export const LocaleContext = React.createContext<LocaleContextType>({
 });
 
 const LocaleProvider: React.FC<ILocalesProvider> = ({children, locales}) => {
-  const [locale, setLocale] = React.useState<string>(defaultLocaleID);
-  const [initializing, setInitializing] = React.useState<boolean>(true);
+  const [locale, setLocale] = useState<string>(defaultLocaleID);
+  const [initializing, setInitializing] = useState<boolean>(true);
 
-  React.useEffect(() => {
+  useEffect(() => {
     (async () => {
       setInitializing(true);
       try {
@@ -73,7 +73,7 @@ const LocaleProvider: React.FC<ILocalesProvider> = ({children, locales}) => {
     })();
   }, [locales]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     let resources = {} as any;
 
     locales.map((l: ILocale) => {
@@ -92,7 +92,7 @@ const LocaleProvider: React.FC<ILocalesProvider> = ({children, locales}) => {
     });
   }, [locales]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     i18n.changeLanguage(locale);
   }, [locale]);
 
