@@ -1,14 +1,14 @@
 import * as React from 'react';
 
-import {LocalesModal} from '../modals2/Locales';
-import {EnvironmentsModal} from '../modals2/Environments';
-import {EnvironmentPinModal} from '../modals2/EnvironmentPin';
-import {UpdateModal} from '../modals2/Update';
-import {SignInModal} from '../modals2/SignIn';
-import {SignUpModal} from '../modals2/SignUp';
+import {LocalesModal} from '../modals/Locales';
+import {EnvironmentsModal} from '../modals/Environments';
+import {EnvironmentPinModal} from '../modals/EnvironmentPin';
+import {UpdateModal} from '../modals/Update';
+import {SignInModal} from '../modals/SignIn';
+import {SignUpModal} from '../modals/SignUp';
 import Toast from 'react-native-toast-message';
 import {toastConfig} from '../constants/common';
-import {AddFavoriteModal} from '../modals2/AddFavorite';
+import {AddFavoriteModal} from '../modals/AddFavorite';
 
 export const Modals = () => {
   return (
