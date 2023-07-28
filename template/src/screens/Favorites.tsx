@@ -11,7 +11,7 @@ import {FAB, List, ProgressBar, useTheme} from 'react-native-paper';
 import {ModalsContext} from '../context/modals';
 import {AppModals} from '../constants/modals';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {QuestionModal} from '../modals/QuestionModal';
+import {QuestionModal} from '../modals2/QuestionModal';
 
 type Props = {
   navigation: StackNavigationProp<any, AppRoutes.Home>;
