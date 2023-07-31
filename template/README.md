@@ -121,3 +121,7 @@ Common commands:
 start project: npm run start
 start project with clearing cache: npm start -- --reset-cache
 install iod dependencies: cd ios & pod install
+
+Update Version for iOS and Android
+The package.json version is used for iOS and Android version. To sync those just run this command:
+`npm run aversion`
