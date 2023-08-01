@@ -3,7 +3,7 @@
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
 
-image: reactnativecommunity/react-native-android:5.4
+image: reactnativecommunity/react-native-android:latest
 
 pipelines:
   branches:
