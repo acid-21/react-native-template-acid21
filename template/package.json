@@ -55,6 +55,7 @@
     "typescript": "4.8.4"
   },
   "engines": {
-    "node": ">=16"
+    "node": ">=16",
+    "yarn": "none"
   }
 }
