@@ -112,6 +112,9 @@ App theming:
 https://reactnavigation.org/docs/themes/
 https://callstack.github.io/react-native-paper/docs/guides/theming
 
+Splash Screen:
+https://blog.logrocket.com/building-splash-screens-react-native/
+
 Vector Icons:
 https://github.com/oblador/react-native-vector-icons
 
