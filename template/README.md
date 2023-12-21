@@ -132,3 +132,6 @@ The package.json version is used for iOS and Android version. To sync those just
 Deep Links:
 https://kaumadiechamalka100.medium.com/how-to-implement-universal-link-app-link-in-react-native-a33eb6532612
 https://branch.io/resources/aasa-validator/
+
+Automated Testing:
+Selenium documentation: https://www.selenium.dev/documentation/webdriver/drivers/
