@@ -1,0 +1,20 @@
+userName: yourUsername
+accessKey: yourKey
+app: bs://c9e45c1cca2c8e6e67528c2a941b2096e3569981
+source: node:appium-sample-sdk:v1.0
+platforms:
+  - platformName: ios
+    deviceName: iPhone 14 Pro Max
+    platformVersion: 16
+  - platformName: ios
+    deviceName: iPhone XS
+    platformVersion: 15
+  - platformName: ios
+    deviceName: iPhone 11
+    platformVersion: 14
+browserstackLocal: false
+buildName: ProjectName
+projectName: ProjectName
+buildIdentifier: CI iOS ${BUILD_NUMBER}
+debug: true
+networkLogs: true

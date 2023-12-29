@@ -1,0 +1,23 @@
+userName: yourUsername
+accessKey: yourKey
+app: android/app/build/outputs/apk/release/app-release.apk
+source: node:appium-sample-sdk:v1.0
+platforms:
+  - deviceName: Samsung Galaxy S22 Ultra
+    osVersion: 12.0
+    platformName: android
+  - deviceName: OnePlus 9
+    osVersion: 11.0
+    platformName: android
+  - deviceName: Google Pixel 6 Pro
+    osVersion: 12.0
+    platformName: android
+browserstackLocal: false
+buildName: ProjectName
+projectName: ProjectName
+buildIdentifier: ANDROID ${BUILD_NUMBER}
+debug: true
+networkLogs: true
+appiumLogs: true
+appiumVersion: 2.0.1
+autoGrantPermissions: true

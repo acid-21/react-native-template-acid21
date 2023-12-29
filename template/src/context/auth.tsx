@@ -12,6 +12,7 @@ export type AuthContextType = {
   initializing: boolean;
   ready: boolean;
   setAuth: (auth: IAuth) => void;
+  getSavedAuth: () => void;
 };
 export interface IAuthProvider {
   children: React.ReactNode;
@@ -26,6 +27,7 @@ export const AuthContext = createContext<AuthContextType>({
   initializing: true,
   ready: false,
   setAuth: () => {},
+  getSavedAuth: () => {},
 });
 
 const AuthProvider: React.FC<IAuthProvider> = ({children}) => {
@@ -68,8 +70,20 @@ const AuthProvider: React.FC<IAuthProvider> = ({children}) => {
     })();
   }, []);
 
+  const getSavedAuth = async () => {
+    const savedAuth = await AsyncStorage.getItem('auth');
+    console.log('savedAuth 1', savedAuth);
+
+    if (savedAuth !== null) {
+      return JSON.parse(savedAuth);
+    } else {
+      return {};
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{auth, setAuth, initializing, ready}}>
+    <AuthContext.Provider
+      value={{auth, setAuth, initializing, ready, getSavedAuth}}>
       {children}
     </AuthContext.Provider>
   );
