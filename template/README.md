@@ -135,3 +135,6 @@ https://branch.io/resources/aasa-validator/
 
 Automated Testing:
 Selenium documentation: https://www.selenium.dev/documentation/webdriver/drivers/
+
+Rename App or Bundle IDs: https://www.npmjs.com/package/react-native-rename
+
