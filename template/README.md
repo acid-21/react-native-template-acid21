@@ -138,3 +138,6 @@ Selenium documentation: https://www.selenium.dev/documentation/webdriver/drivers
 
 Rename App or Bundle IDs: https://www.npmjs.com/package/react-native-rename
 
+Generate Release Keystore: keytool -genkeypair -v -storetype PKCS12 -keystore my-upload-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
+Source: https://stackoverflow.com/questions/72974447/how-can-i-make-a-new-release-on-my-android-app-if-i-lost-my-keystore
+
