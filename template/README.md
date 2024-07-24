@@ -143,4 +143,5 @@ Source: https://stackoverflow.com/questions/72974447/how-can-i-make-a-new-releas
 
 Automated aab upload:
 https://developers.google.com/android-publisher
+https://github.com/r0adkll/upload-google-play
 
