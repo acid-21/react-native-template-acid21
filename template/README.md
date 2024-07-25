@@ -145,4 +145,5 @@ Automated aab upload:
 https://developers.google.com/android-publisher
 https://github.com/r0adkll/upload-google-play
 https://github.com/googleapis/google-api-nodejs-client
+https://github.com/studioLaCosaNostra/publish-aab-google-play
 
